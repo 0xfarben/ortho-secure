@@ -1,8 +1,7 @@
 # OrthoSecure
 
 ## Overview
-Orthosecure is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its
-user-friendly interface and powerful administrative panel, Orthosecure empowers dental practices to efficiently manage appointments, patient records, and clinic operations.
+Orthosecure is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its user-friendly interface and powerful administrative panel, Orthosecure empowers dental practices to efficiently manage appointments, patient records, and clinic operations.
 OrthoSecure is a robust and secure application designed to enhance security and compliance within containerized environments. It leverages cutting-edge technologies to monitor, analyze, and secure workloads in real-time.
 
 ## Features
@@ -49,6 +48,9 @@ Ensure you have the following installed:
 - SonarQube & Sonar-Scanner (for static code analysis)
 - AWS Account and CLI configured
 - Terraform CLI configured
+
+
+# Security-Focused DevSecOps Implementation
 
 ### Installation
 1. Clone the repository:
