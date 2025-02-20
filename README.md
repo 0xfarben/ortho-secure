@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/408c4d79-ad75-4880-8da9-1d8cdb692e4c)# OrthoSecure
+# OrthoSecure
 
 ## Overview
 Orthosecure is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its
