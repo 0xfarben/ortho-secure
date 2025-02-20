@@ -1,8 +1,10 @@
-# OrthoSecure
+# OrthoSecure 
 
 ## Overview
 Orthosecure is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its user-friendly interface and powerful administrative panel, Orthosecure empowers dental practices to efficiently manage appointments, patient records, and clinic operations.
 OrthoSecure is a robust and secure application designed to enhance security and compliance within containerized environments. It leverages cutting-edge technologies to monitor, analyze, and secure workloads in real-time.
+
+![image](https://github.com/user-attachments/assets/994a3399-abe9-4dcd-af57-40e5505c91e9)
 
 ## Features
 - **Appointment Booking System:** Allows patients to book, modify, or cancel appointments online with ease.
