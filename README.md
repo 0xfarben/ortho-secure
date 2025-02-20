@@ -10,7 +10,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 - **Ease of Deployment:** Simple setup with Docker and Kubernetes.
 - **Policy Enforcement:** Implements security policies using Falco and other monitoring tools.
 
-## Contributors
+## Project Team Members
 
 This project was Contributed by 
 
@@ -81,14 +81,6 @@ Ensure you have the following installed:
 
 ## CI/CD Integration
 OrthoSecure integrates with GitLab CI/CD using `.gitlab-ci.yml`, ensuring continuous security analysis and compliance checks.
-
-## Contributing
-We welcome contributions! Please follow our guidelines:
-- Fork the repository.
-- Create a new branch (`feature/your-feature`).
-- Commit changes and push to GitHub.
-- Submit a pull request.
-
 
 ## 🛠️ Author & Community  
 
