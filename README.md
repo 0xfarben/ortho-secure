@@ -143,8 +143,10 @@ Security is a top priority in this project. Below are the DevSecOps security too
    git clone https://github.com/thayeeb9211/ortho-secure.git
    cd ortho-secure
    ```
-2. Set up environment variables:
+2. Set up environment variables and sonar properties:
    ```sh
+
+   [Make sure you create a .env file and add up your values in .env]
    MYSQL_HOST=<your host name>
    MYSQL_DATABASE=<your DB name>
    MYSQL_USER=<your username>
@@ -157,6 +159,16 @@ Security is a top priority in this project. Below are the DevSecOps security too
    SONAR_LOGIN= <your sonarqube login token>
    SECRET_KEY = <secret used in main.py for this project>
    MAIL_PASSWORD = <it's a mail password>
+
+
+   [Make sure you create a sonar-project.properties file and add up your values in sonar-project.properties]
+   sonar.projectKey=your_project_key_here
+   sonar.token=your_sonar_token_here
+   sonar.sources=.
+   sonar.qualitygate.wait=true
+   sonar.host.url=http://your_sonar_host_url_here
+   sonar.python.version=your_python_version_here
+
    ```
 3. Start the application on Docker:
    ```sh
