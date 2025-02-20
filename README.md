@@ -53,8 +53,18 @@ Ensure you have the following installed:
    ```
 2. Set up environment variables:
    ```sh
-   cp .env.example .env
-   nano .env  # Edit variables as needed
+   MYSQL_HOST=<your host name>
+   MYSQL_DATABASE=<your DB name>
+   MYSQL_USER=<your username>
+   MYSQL_PASSWORD=<Mysql password>
+   MYSQL_ROOT_PASSWORD=<Root password>
+   FLASK_ENV=development
+   MYSQL_PORT=3306
+   MYSQL_INITDB_SKIP_TZINFO=1
+   SONAR_HOST_URL= "http://localhost:9000" or maybe different in your case [make sure it is reachable]
+   SONAR_LOGIN= <your sonarqube login token>
+   SECRET_KEY = <secret used in main.py for this project>
+   MAIL_PASSWORD = <it's a mail password>
    ```
 3. Start the application on Docker:
    ```sh
