@@ -1,3 +1,5 @@
+<img src="https://github.com/user-attachments/assets/6a102742-c3ec-4ebd-94be-3672d7f961d0" alt="Shortened Image" width="auto" height="50">  
+
 # OrthoSecure 
 
 ## Overview
