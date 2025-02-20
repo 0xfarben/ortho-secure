@@ -1,0 +1,58 @@
+{% extends 'Admin/base.html' %}
+
+{% block body %}
+    <a class="text-decoration-none text-primary text-uppercase" data-bs-toggle="collapse" href="#collapse-Table" role="button" aria-expanded="false" aria-controls="collapse-Table">
+        <h2 class="fw-bolder text-primary text-uppercase"><i class="bi bi-caret-right-fill"></i>Recorded images in database</h2>
+    </a>
+    <div class="row">
+        <div id="collapse-Table" class="collapse table-responsive col-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for slide in sliderImg %}
+                    <tr>
+                        <th scope="row">{{slide[0]}}</th>
+                        <th scope="row"><img class="imageTable" src="../{{slide[1]}}" alt="{{slide[1]}}"></th>
+                        <td scope="row">{{slide[2]}}</td>
+                        <td scope="row">{{slide[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="fw-bolder text-primary mt-2 text-uppercase">Add slider</h2>
+        <form enctype=multipart/form-data action="{{ url_for('sliderAdmin') }}" method="post" class="row g-3">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" name="file" id="file">
+                    <label class="input-group-text" for="file">Upload</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="input-group">
+                    <span class="input-group-text">Description</span>
+                    <textarea name="description" id="description" class="form-control" aria-label="description"></textarea>
+                  </div>
+            </div>
+            <p class="text-center {{registered}}">{{ msg }}</p>
+            <div class="col-6 offset-5">
+                <button class="btn btn-primary" type="submit">Add image</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

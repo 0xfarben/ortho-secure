@@ -1,0 +1,86 @@
+{% extends 'main.html' %}
+{% block main %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/Admin/Home">
+            <span class="fw-bolder text-primary">{{session.title}}</span> <span class="text-secondary">ADMIN CONTROL PANEL</span>
+        </a>
+        <button class="{{hide}} navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-lg-none {{hide}}">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/Admin/Home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/Admin/General">General</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/slider">Slider images</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/Admins">Admins</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/doctors">Doctors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/Services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/Appointemnts">Appointments</a>
+                </li>
+            </ul>
+            <div>
+                {% if session.usernameAdmin %}
+                    <small class="fw-bolder">Hi, <span class="text-primary">{{session.usernameAdmin}}</span></small>
+                    <a href="{{ url_for('logoutAdmin') }}" class="btn link-primary">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="clearfix"></div>
+
+<main>
+    <div class="p-5 container-fluid">    
+        <main class="p-5 main-Admin">
+            <div class="row">
+                <div class="
+                {% if login %}
+                    col-md-12
+                {% else %}
+                    col-md-9
+                {% endif %}
+                ">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+                <div class="col-md-3 sm-none mt-2">
+                    <div class="{{hide}} list-group">
+                        <a href="/Admin/Home" class="list-group-item list-group-item-action">Home</a>
+                        <a href="/Admin/General" class="list-group-item list-group-item-action">General</a>
+                        <a href="/Admin/slider" class="list-group-item list-group-item-action">Slider</a>
+                        <a href="/Admin/Admins" class="list-group-item list-group-item-action">Admins</a>
+                        <a href="/Admin/users" class="list-group-item list-group-item-action">Users</a>
+                        <a href="/Admin/doctors" class="list-group-item list-group-item-action">Doctors</a>
+                        <a href="/Admin/Services" class="list-group-item list-group-item-action">Services</a>
+                        <a href="/Admin/Appointemnts" class="list-group-item list-group-item-action">Appointments</a>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+</main>
+
+<div class="clearfix"></div>
+    
+{% endblock %}
+

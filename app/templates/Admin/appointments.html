@@ -1,0 +1,139 @@
+{% extends 'Admin/base.html' %}
+
+{% block body %}
+<h1 class="text-decoration-none fw-bolder text-primary text-uppercase">Appointments</h1>
+<a class="text-decoration-none text-secondary" data-bs-toggle="collapse" href="#collapse-Table-Waiting" role="button" aria-expanded="false" aria-controls="collapse-Table">
+  <h3 class="fw-bolder">Waiting Appointments</h3>
+</a>
+<div class="collapse table-responsive col-12" id="collapse-Table-Waiting">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+          <th scope="col">SSN</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Middle Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Doctor Name</th>
+          <th scope="col">Service</th>
+          <th scope="col">Username</th>
+          <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for Appointment in AppointmentsTable %}
+          {% if Appointment[8] == "Waiting" %}
+          <tr>
+            <th scope="row">{{Appointment[0]}}</th>
+            <td scope="row">{{Appointment[1]}}</td>
+            <td scope="row">{{Appointment[2]}}</td>
+            <td scope="row">{{Appointment[3]}}</td>
+            <td scope="row">{{Appointment[4]}}</td>
+            <td scope="row">{{Appointment[5]}}</td>
+            <td scope="row">{{Appointment[6]}}</td>
+            <td scope="row">{{Appointment[10]}}</td>
+            <td scope="row">{{Appointment[11]}}</td>
+            <td scope="row">{{Appointment[9]}}</td>
+            <td scope="row">
+              <form action="{{ url_for('appointmentsAdmin') }}" method="post">
+                <input class="visually-hidden" type="int" name="id" value="{{Appointment[0]}}">
+                <input class="form-control" type="date" name="date" required>
+                <div class=" text-center mt-2">
+                    <input name="status" type="submit" class="btn btn-success" value="Accept">
+                    <input name="status" type="submit" class="btn btn-danger" value="Refuse">
+                </div>
+              </form>
+            </td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a class="text-decoration-none text-secondary" data-bs-toggle="collapse" href="#collapse-Table-Refused" role="button" aria-expanded="false" aria-controls="collapse-Table">
+  <h3 class="fw-bolder">Refused Appointments</h3>
+</a>
+<div class="collapse table-responsive col-12" id="collapse-Table-Refused">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+          <th scope="col">SSN</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Middle Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Doctor Name</th>
+          <th scope="col">Service</th>
+          <th scope="col">Username</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for Appointment in AppointmentsTable %}
+          {% if Appointment[8] == "Refused" %}
+          <tr>
+            <th scope="row">{{Appointment[0]}}</th>
+            <td scope="row">{{Appointment[1]}}</td>
+            <td scope="row">{{Appointment[2]}}</td>
+            <td scope="row">{{Appointment[3]}}</td>
+            <td scope="row">{{Appointment[4]}}</td>
+            <td scope="row">{{Appointment[5]}}</td>
+            <td scope="row">{{Appointment[6]}}</td>
+            <td scope="row">{{Appointment[10]}}</td>
+            <td scope="row">{{Appointment[11]}}</td>
+            <td scope="row">{{Appointment[9]}}</td>
+          </tr>
+          {% endif %}
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a class="text-decoration-none text-secondary" data-bs-toggle="collapse" href="#collapse-Table-Scheduled" role="button" aria-expanded="false" aria-controls="collapse-Table">
+    <h3 class="fw-bolder">Scheduled Appointments</h3>
+</a>
+<div class="collapse table-responsive col-12" id="collapse-Table-Scheduled">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">SSN</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Middle Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Age</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Doctor Name</th>
+              <th scope="col">Service</th>
+              <th scope="col">Username</th>
+              <th scope="col">Date</th>
+          </tr>
+        </tr>
+      </thead>
+      <tbody>
+          {% for Appointment in AppointmentsTable %}
+            {% if Appointment[8] == "Scheduled" %}
+            <tr>
+              <th scope="row">{{Appointment[0]}}</th>
+              <td scope="row">{{Appointment[1]}}</td>
+              <td scope="row">{{Appointment[2]}}</td>
+              <td scope="row">{{Appointment[3]}}</td>
+              <td scope="row">{{Appointment[4]}}</td>
+              <td scope="row">{{Appointment[5]}}</td>
+              <td scope="row">{{Appointment[6]}}</td>
+              <td scope="row">{{Appointment[10]}}</td>
+              <td scope="row">{{Appointment[11]}}</td>
+              <td scope="row">{{Appointment[9]}}</td>
+              <td scope="row">{{Appointment[7]}}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

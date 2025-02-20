@@ -1,0 +1,20 @@
+
+rbac/role-restricted-deployer.yaml (kubernetes)
+===============================================
+Tests: 74 (SUCCESSES: 73, FAILURES: 1)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+AVD-KSV-0048 (MEDIUM): Role 'restricted-deployer' should not have access to resources ["pods", "deployments", "jobs", "cronjobs", "statefulsets", "daemonsets", "replicasets", "replicationcontrollers"] for verbs ["create", "update", "patch", "delete", "deletecollection", "impersonate", "*"]
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Depending on the policies enforced by the admission controller, this permission ranges from the ability to steal compute (crypto) by running workloads or allowing for creating workloads that escape to the node as root and escalation to cluster-admin.
+
+See https://avd.aquasec.com/misconfig/ksv048
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ rbac/role-restricted-deployer.yaml:7-9
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   7 ┌   - apiGroups: [""]
+   8 │     resources: ["pods", "deployments"]  # Resources affected by the role
+   9 └     verbs: ["create", "get", "list"]   # Actions allowed
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+

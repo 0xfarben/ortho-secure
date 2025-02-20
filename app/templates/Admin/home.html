@@ -1,0 +1,151 @@
+{% extends 'Admin/base.html' %}
+
+{% block body %}
+        <h2 class="fw-bolder text-primary">Home Page</h2>
+        <p class="lead">Welcome back, {{ session.usernameAdmin }}!</p>
+
+        <hr>
+
+        <a class="text-decoration-none text-info" data-bs-toggle="collapse" href="#stat-analysis" role="button" aria-expanded="false" aria-controls="stat-analysis">
+        <h3><i class="bi bi-caret-right-fill"></i>Statistical Analysis</h3>
+        </a>
+
+        <div class="collapse text-center" id="stat-analysis">
+            <div class="row">
+                <input name="rating" id="rating" class="rating" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" style="--value:{{AvgOfRates}};background:#fff;--starsize: 2.5rem;min-width: 225px;" type="range" disabled>
+                <h4 class="col-lg-1 mt-1">{{AvgOfRates}}</h4>
+            </div>
+
+            <!-- Appointments Statistics  -->
+            <div class="row mt-4">
+                <div class="col-lg-3">
+                    <h3 class="text-primary">{{AppointmentsList[0]}}</h3>
+                    <h4>Appointments</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 class="text-primary">{{AppointmentsList[1]}}</h3>
+                    <h4>Succesfull Appointment</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 class="text-primary">{{AppointmentsList[2]}}</h3>
+                    <h4>Accepted Appointment</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 class="text-primary">{{AppointmentsList[3]}}</h3>
+                    <h4>Refused Appointment</h3>
+                </div>
+            </div>
+            <table class="mt-4 bar-stat charts-css column show-heading show-labels show-primary-axis">
+                <caption class="text-center"> Statistical Analysis of Appointments </caption>
+                <tbody> 
+                  <tr>
+                    <th scope="row"> Refused </th> 
+                    <td style="--size:{{AppointmentsListPrecentage[2]}};"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"> Accepted </th> 
+                    <td style="--size:{{AppointmentsListPrecentage[1]}};"></td>
+                  </tr> 
+                  <tr>
+                    <th scope="row"> Succesfull </th> 
+                    <td style="--size:{{AppointmentsListPrecentage[0]}};"></td>
+                  </tr> 
+                </tbody>
+            </table>
+            
+            <div class="container"><hr></div>
+
+            <!-- Services Statistics  -->
+            <table style="max-width: 600px;" class="mt-4 show-heading bar-stat charts-css column show-labels show-primary-axis">
+                <caption class="text-center"> Statistical Analysis of Services </caption>
+                <tbody>
+                    {% for Service,Count in ServicesDict.items() %}
+                    <tr>
+                        <th scope="row"> {{Service}} </th> 
+                        <td style="--size:{{Count/ServicesDict.values() | sum()}};"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h4 class="mt-5">Statistical Analysis of Services</h4>
+            <center>
+                <div id="my-pie-chart-container">
+                    <div id="my-pie-chart"></div>
+                    <div id="legenda">
+                        <style>
+                            #my-pie-chart {
+                                background: conic-gradient(
+                                    {% for Service,Count in ServicesDict.items() %}
+                                        {% set precent = ServicesDict.values() | sum() %}
+                                        {{colors[loop.index - 1][6:]}} {{"%.3f" | format(Count/precent * 100) }}%
+                                        {% if loop.last %}
+                                        {% else %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                );
+                                    
+                            }
+                        </style>
+                        {% for Service,Count in ServicesDict.items() %}
+                        <div class="entry">
+                            <div id="{{colors[loop.index - 1]}}" class="entry-color"></div>
+                            <div class="entry-text">{{Service}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </center>
+            
+            <div class="container"><hr></div>
+
+            <!-- Doctors Statistics  -->
+            <div class="row mt-4">
+                <div class="col-lg-4">
+                    <h3 class="text-primary">{{DoctorsList[0]}}</h3>
+                    <h4>Doctors</h3>
+                </div>
+                <div class="col-lg-2">
+                    <h3 class="text-primary">{{DoctorsList[1]}}</h3>
+                    <h4>>=20</h4>
+                </div>
+                <div class="col-lg-2">
+                    <h3 class="text-primary">{{DoctorsList[2]}}</h3>
+                    <h4>>=30</h4>
+                </div>
+                <div class="col-lg-2">
+                    <h3 class="text-primary">{{DoctorsList[3]}}</h3>
+                    <h4>>=40</h4>
+                </div>
+                <div class="col-lg-2">
+                    <h3 class="text-primary">{{DoctorsList[4]}}</h3>
+                    <h4>>50</h3>
+                </div>
+            </div>
+            <table class="mt-4 show-heading bar-stat charts-css column show-labels show-primary-axis">
+                <caption class="text-center"> Statistical Analysis of Doctors </caption>
+                <tbody> 
+                  <tr>
+                    <th scope="row"> >= 20 </th> 
+                    <td style="--size:{{DoctorsListPrecentage[0]}};"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"> >= 30 </th> 
+                    <td style="--size:{{DoctorsListPrecentage[1]}};"></td>
+                  </tr> 
+                  <tr>
+                    <th scope="row"> >= 40 </th> 
+                    <td style="--size:{{DoctorsListPrecentage[2]}};"></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"> >= 50 </th> 
+                    <td style="--size:{{DoctorsListPrecentage[3]}};"></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <hr>
+        
+{% endblock %}

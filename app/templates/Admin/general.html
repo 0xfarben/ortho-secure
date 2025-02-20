@@ -1,0 +1,49 @@
+{% extends 'Admin/base.html' %}
+
+{% block body %}
+    <h2 class="fw-bolder text-primary">
+        <i class="bi bi-caret-right-fill"></i>
+        General Settings
+    </h2>
+        <form enctype=multipart/form-data action="{{ url_for('generalAdmin') }}" method="post" class="row g-1 needs-validation">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input name="title" id="title" type="text" class="form-control" value="{{siteinfo[0]}}">
+            </div>
+            <div class="mb-3">
+                <label for="icon" class="form-label">Icon</label>
+                <div class="row">
+                    <div class="col-md-11">
+                        <input id="icon" name="icon" type="file" class="form-control" value="{{siteinfo[6]}}">
+                    </div>
+                    <div class="col-md-1">
+                        <img class="img-fluid img-thumbnail" width="50px" height="50px" src="{{ url_for('static', filename='img/icon/icon.png') }}" alt="icon" />
+                    </div>
+                </div>    
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input id="address" name="address" type="text" class="form-control" value="{{siteinfo[1]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" name="email" type="Email" class="form-control" value="{{siteinfo[2]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input id="phone" name="phone" type="text" class="form-control" value="{{siteinfo[3]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="short" class="form-label">Short description</label>
+                <input id="short" name="short" type="text" class="form-control" value="{{siteinfo[4]}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="long" class="form-label">Long description</label>
+                <textarea id="long" name="long" class="form-control" required>{{siteinfo[5]}}</textarea>
+            </div>
+            <p class="text-center {{registered}}">{{ msg }}</p>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Update Information</button>
+            </div>
+        </form>
+{% endblock %}

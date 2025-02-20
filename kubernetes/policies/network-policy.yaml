@@ -1,0 +1,58 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-app-traffic  # Name of the network policy
+  namespace: default  # Namespace where the policy applies
+spec:
+  podSelector:
+    matchLabels:
+      app: my-app  # Apply this policy to Pods with the label "app: my-app"
+  policyTypes:
+    - Ingress  # Control incoming traffic
+    - Egress   # Control outgoing traffic
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: my-app  # Allow traffic only from Pods with the label "app: my-app"
+      ports:
+        - protocol: TCP  # Allow TCP traffic
+          port: 80       # Allow traffic on port 80
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: my-app  # Allow traffic only to Pods with the label "app: my-app"
+      ports:
+        - protocol: TCP  # Allow TCP traffic
+          port: 80       # Allow traffic on port 80
+
+
+
+
+
+
+
+# kubectl apply -f kubernetes/policies/network-policy.yaml
+
+
+
+
+
+
+
+
+
+# Explanation:
+# Purpose:
+# Restricts traffic to and from Pods with the label app: my-app.
+# Only allows traffic on port 80 (e.g., HTTP traffic).
+
+# Key Sections:
+# podSelector: Specifies the Pods the policy applies to.
+# ingress: Controls incoming traffic to the selected Pods.
+# egress: Controls outgoing traffic from the selected Pods.
+
+# How It Works:
+# Only Pods with the label app: my-app can communicate with each other on port 80.
+# All other traffic is denied by default.

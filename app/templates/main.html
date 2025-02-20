@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="icon" href="{{ url_for('static', filename='img/icon/icon.png') }}">
+
+    <title>{{ session.title }} | {{ titlePage }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/calender/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/charts.css') }}">
+
+    <!-- Custom styles -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+        });
+        const AppointmentsData = {{ AppointmentsListJson|safe }};
+        for (let appointment of AppointmentsData) {
+          var date = new Date(appointment[7] + 'T00:00:00'); // will be in local time
+          calendar.addEvent({
+            title: encodeURI(appointment[2] + " " + appointment[3] + " " + appointment[4]),
+            start: date,
+            allDay: true
+          });
+        }
+        calendar.render();
+      });
+    </script>
+  </head>
+  
+  <body>
+    {% block main %}
+    {% endblock %}
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top p-1">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+              <img class="bi" height="24" src="{{ url_for('static', filename='img/icon/icon.png') }}" alt="{{ session.title }}" title="{{ session.title }}">
+            </a>
+            <span class="text-muted">&copy; 2024-2025 OrthoSecure</span>
+          </div>
+          
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3">
+              <a class="text-muted" href="https://github.com/MoErn854/Dentistry-Department-Website.git">
+                <i style="font-size: 30px;" class="bi bi-github">
+                  <use xlink:href="#github"></use>
+                </i>
+              </a>
+            </li>
+          </ul>
+        </footer>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/calender/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

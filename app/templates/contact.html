@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+  <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="bg-light p-5 container">
+    <h1 class="fw-bolder text-primary mb-4 text-center text-uppercase">Contact Us</h1>
+        <form action="{{ url_for('ContactUs') }}" method="POST" class="row g-3 needs-validation" novalidate>
+          <div class="col-md-12">
+            <label for="name" class="form-label">Name</label>
+            <input name="name" id="name" type="text" class="form-control" required />
+          </div>
+          <div class="col-md-12">
+            <label for="email" class="form-label">Email</label>
+            <input name="email" id="email" type="email" class="form-control" required />
+          </div>
+          <div class="col-md-12">
+            <label for="subject" class="form-label">Subject</label>
+            <input name="subject" id="subject" type="text" class="form-control" required />
+          </div>
+          <div class="col-md-12">
+            <label for="validationLName" class="form-label">Message</label>
+            <textarea name="message" id="message" type="text" class="form-control" required></textarea>
+          </div>
+          <div class=" offset-md-10 col-md-2">
+            <button role="button" class="button-9 btn btn-primary" type="submit">Send</button>
+          </div>
+          <p class="text-center {{PassOrNot}}">{{ msg }}</p>
+        </form>
+  </div>
+</main>
+
+{% endblock %}

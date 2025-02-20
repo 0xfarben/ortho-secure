@@ -1,0 +1,111 @@
+{% extends 'Admin/base.html' %}
+
+{% block body %}
+    <a class="text-decoration-none text-primary text-uppercase" data-bs-toggle="collapse" href="#collapse-Table" role="button" aria-expanded="false" aria-controls="collapse-Table">
+        <h2 class="fw-bolder text-primary">
+            <i class="bi bi-caret-right-fill"></i>
+            Recorded doctors in database
+        </h2>
+    </a>
+    <div class="row">
+        <div  id="collapse-Table" class="collapse table-responsive col-12">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">SSN</th>
+                        <th scope="col">image</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Middle Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Degree</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in DoctorsData %}
+                    <tr>
+                        <th scope="row">{{doctor[0]}}</th>
+                        <th scope="row">{{doctor[1]}}</th>
+                        <td><img class="imageTable" src="../{{doctor[11]}}" alt="{{doctor[1]}}"></td>
+                        <td>{{doctor[2]}}</td>
+                        <td>{{doctor[3]}}</td>
+                        <td>{{doctor[4]}}</td>
+                        <td>{{doctor[5]}}</td>
+                        <td>{{doctor[6]}}</td>
+                        <td>+20{{doctor[7]}}</td>
+                        <td>{{doctor[8]}}</td>
+                        <td>{{doctor[9]}}</td>
+                        <td>{{doctor[10]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <h2 class="text-uppercase fw-bolder text-primary mt-2">
+            Add Doctors
+        </h2>
+        <form enctype=multipart/form-data  action="{{ url_for('doctors') }}" method="post" class="row g-1 needs-validation">
+            <div class="col-md-12">
+                <label for="SSN" class="form-label">SSN (Social Security Number)</label>
+                <input name="SSN" id="SSN" type="number" class="form-control" placeholder="Enter SSN" required>
+            </div>
+            <div class="col-md-4">
+                <label for="FName" class="form-label">First Name</label>
+                <input id="FName" name="FName" type="text" class="form-control" placeholder="Enter First Name" required>
+            </div>
+            <div class="col-md-4">
+                <label for="MidName" class="form-label">Middle Name</label>
+                <input id="MidName" name="MidName" type="text" class="form-control" placeholder="Enter Middle Name" required>
+            </div>
+            <div class="col-md-4">
+                <label for="LName" class="form-label">Last Name</label>
+                <input id="LName" name="LName" type="text" class="form-control" placeholder="Enter Last Name" required>
+            </div>
+            <div class="col-md-12">
+                <label for="file" class="form-label">Upload profile image</label>
+                <div class="input-group mb-3">
+                    <input name="file" id="file" type="file" class="form-control" >
+                    <label class="input-group-text" for="file">Upload</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="Phone" class="form-label">Phone</label>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="Phone">+20</label>
+                    <input id="Phone" name="Phone" type="text" class="form-control" placeholder="Enter Phone" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="Email" class="form-label">Email</label>
+                <input id="Email" name="Email" type="email" class="form-control" placeholder="Enter Email" required>
+            </div>
+            <div class="col-md-12">
+                <label for="Degree" class="form-label">Degree</label>
+                <input id="Degree" name="Degree" type="text" class="form-control" placeholder="Enter Degree" required>
+            </div>
+            <div class="col-md-6">
+                <label for="Age" class="form-label">Age</label>
+                <input id="Age" name="Age" type="number" class="form-control" placeholder="Enter Age" required>
+            </div>
+            <div class="col-md-6">
+                <label for="Gender" class="form-label">Gender</label>
+                <select name="Gender" id="Gender" class="form-select" id="validationGender" required>
+                    <option selected disabled value="">Choose...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>              
+            </div>
+            <p class="text-center {{registered}}">{{ msg }}</p>
+            <div class="col-6 offset-5">
+                <button class="btn btn-primary" type="submit">Add doctor</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

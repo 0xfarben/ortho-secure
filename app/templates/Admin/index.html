@@ -1,0 +1,22 @@
+{% extends 'Admin/base.html' %}
+{% block body %}
+    <div class="p-3 p-lg-0"></div>
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-12">
+            <form action="{{ url_for('login') }}" method="post" class="p-5 text-center needs-validation">
+                <h2 class="fw-bolder fs-1 text-primary text-uppercase">Login</h2>
+                <div class="form-group">
+                  <label for="username" class="form-label">Username</label>
+                  <input name="username" id="username" type="text" class="form-control" placeholder="Enter Username" required>
+                </div>
+                <div class="mt-2 form-group">
+                  <label for="Password">Password</label>
+                  <input id="password" name="password" type="password" class="form-control" placeholder="Enter Password">
+                </div>
+                <p class="text-center">{{ msg }}</p>
+                <button class="btn btn-primary" type="submit">Sign In</button>
+            </form>
+        </div>
+    </div
+
+{% endblock %}

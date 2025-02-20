@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+    <div class="p-5 container text-center">
+    <h1 class="fw-bolder text-primary text-uppercase">Our Dentists</h1>
+    <div class="p-3"></div>
+        <div class="row">
+            {% for doctor in DoctorsData %}
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-3 p-3">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="{{doctor[11]}}" onerror="this.onerror=null ;this.src='{{ url_for('static', filename='img/default-image.jpg') }}'" />
+                        <div class="card-body">
+                            <h6 class="card-title">{{doctor[2] + " " +  doctor[3] + " " + doctor[4]}}</h6>
+                            <p class="card-text">{{doctor[9]}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{doctor[5] }} Years</li>
+                            <li class="list-group-item">{{doctor[6]}}</li>
+                            <li class="list-group-item">+20{{doctor[7]}}</li>
+                            <li class="list-group-item">{{doctor[8]}}</li>
+                        </ul>
+                        <div class="card-body">
+                        {% if session.username %} 
+                        <a href="/Appointment" class="btn btn-primary card-link">Book Appointment with him!</a>
+                        {% else %}
+                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="You must be a user!">
+                            <a style="pointer-events: none;" href="/Appointment" class="btn btn-primary card-link disabled">Book Appointment with him!</a>
+                        </span>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+
+</main>
+
+
+{% endblock %}

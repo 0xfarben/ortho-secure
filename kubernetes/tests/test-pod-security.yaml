@@ -1,0 +1,12 @@
+# filepath: /c:/Users/Tayyab Qadri/OneDrive/Documents/OrthoSecure/kubernetes/tests/test-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-container
+    image: busybox
+    command: ["sleep", "3600"]
+    securityContext:
+      privileged: true

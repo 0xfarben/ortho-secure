@@ -1,0 +1,353 @@
+@charset "UTF-8";
+/*!
+ * Main File Style Css for Website Peoject
+ */
+
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+html{
+    background: #f8f9ff;
+}
+
+body {
+    padding-top: 40px;
+    position: relative;
+}
+
+/* Sections */
+main{
+  background: rgb(248 249 250);
+}
+
+.section{
+  padding: 90px 0px;
+}
+.section h1{
+  color: rgb(0 137 203);
+}
+
+.sectionMain{
+  padding: 100px;
+}
+
+/* Footer */
+footer{
+  background: #ffffff;
+  border-top: 3px solid #0090d5;
+}
+
+
+.about-text p {
+  text-align: justify;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+/* CSS */
+.button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
+
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
+
+
+.cover-bg{
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  position: relative !important;
+}
+
+.seperate{
+  height: 2rem;
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 0;  
+  box-shadow: inset 0 0.5em 1.5em rgb(0 0 0 / 8%), inset 0 0.125em 0.5em rgb(0 0 0 / 15%);
+}
+
+.imageTable{
+  max-width: 240px;
+}
+
+
+.main-Admin{
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+  background-color: #fff;
+}
+
+
+.carousel-H{
+  background: none !important;
+  height: auto !important;
+  min-height: 12rem !important;
+}
+
+
+.rating {
+  --dir: right;
+  --fill: gold;
+  --fillbg: rgba(100, 100, 100, 0.15);
+  --heart: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.328l-1.453-1.313q-2.484-2.25-3.609-3.328t-2.508-2.672-1.898-2.883-0.516-2.648q0-2.297 1.57-3.891t3.914-1.594q2.719 0 4.5 2.109 1.781-2.109 4.5-2.109 2.344 0 3.914 1.594t1.57 3.891q0 1.828-1.219 3.797t-2.648 3.422-4.664 4.359z"/></svg>');
+  --star: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.25l-6.188 3.75 1.641-7.031-5.438-4.734 7.172-0.609 2.813-6.609 2.813 6.609 7.172 0.609-5.438 4.734 1.641 7.031z"/></svg>');
+  --stars: 5;
+  --starsize: 3rem;
+  --symbol: var(--star);
+  --value: 1;
+  --w: calc(var(--stars) * var(--starsize));
+  --x: calc(100% * (var(--value) / var(--stars)));
+  block-size: var(--starsize);
+  inline-size: var(--w);
+  position: relative;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+
+.rating::-moz-range-track {
+  background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+  block-size: 100%;
+  mask: repeat left center/var(--starsize) var(--symbol);
+}
+.rating::-webkit-slider-runnable-track {
+  background: linear-gradient(to var(--dir), var(--fill) 0 var(--x), var(--fillbg) 0 var(--x));
+  block-size: 100%;
+  mask: repeat left center/var(--starsize) var(--symbol);
+  -webkit-mask: repeat left center/var(--starsize) var(--symbol);
+}
+.rating::-moz-range-thumb {
+  height: var(--starsize);
+  opacity: 0;
+  width: var(--starsize);
+}
+.rating::-webkit-slider-thumb {
+  height: var(--starsize);
+  opacity: 0;
+  width: var(--starsize);
+  -webkit-appearance: none;
+}
+.rating {
+  display: block;
+  margin-top: 0px;
+  background: #f8f9fa;
+}
+
+
+/* Contact Us */
+.contact form {
+  margin-top: 0px;
+  padding: 0px 30px;
+}
+
+.contact h3 {
+  color: #488ace;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.contact p {
+  margin: 0 0px 10px;
+  margin-left: 0px!important;
+}
+.contact label {
+  display: none;
+}
+.contact input {
+ width: 100%;
+  border: none;
+  border: 1px solid #dddddd78;
+  padding: 10px;
+  border-radius: 4px;
+}
+.contact textarea#message {
+  width: 100%;
+  height: 122px;
+  border: 1px solid #dddddd78;
+  border-radius: 4px;
+  padding: 10px;
+}
+.contact input#submit {
+  color: white;
+  background: linear-gradient(0.25turn,#0058b1, #71a1d4);
+  border-radius: 2px;
+  box-shadow: 0px 0px 4px 0px #00000042;
+  margin-top: 15px;
+}
+
+/* Statistical Analysis */ 
+.bar-stat {
+  height: 200px;
+  max-width: 250px;
+  margin: 0 auto;
+}         
+
+.charts-css th {
+  padding-top: 59px !important;
+}
+
+/* Pie charts */
+#my-pie-chart-container {
+  display: flex;
+  align-items: center;
+}
+
+#my-pie-chart {
+  border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+#legenda {
+  margin-left: 20px;
+  background-color: white;
+  padding: 5px;
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+}
+
+.entry-color {
+    height: 10px;
+    width: 10px;
+}
+
+.entry-text {
+  margin-left: 5px;
+}
+
+#color-red {
+  background-color: red;
+}
+
+#color-orange {
+  background-color: orange;
+}
+
+#color-yellow {
+  background-color: yellow;
+}
+
+#color-green {
+  background-color: green;
+}
+
+#color-blue {
+  background-color: blue;
+}
+
+#color-black {
+  background-color: black;
+}
+
+#color-brown {
+  background-color: brown;
+} 
+/* ********************** */
+/* Bootstrap Edit styles */
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 2px rgb(0 137 203) solid ;
+  }
+
+  .navbar-light .navbar-brand {
+    color: rgb(0 137 203);
+  }
+
+  .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link{
+    background-color: rgba(0, 170, 255, 0.55);
+  }
+
+  .nav-item:hover{
+    background-color: rgb(120 211 255 / 55%) !important;
+    }
+
+
+  .navbar-collapse {
+    flex-grow: 0
+  }
+
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+/* Carousel base class */
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  bottom: 3rem;
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+  height: 32rem;
+  background: rgb(120 211 255 / 55%);
+}
+.carousel-item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 32rem;
+}
+
+.carousel-caption{
+  background-color: #00000029;
+    padding: 10px;
+}

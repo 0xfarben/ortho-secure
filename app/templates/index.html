@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for slide in sliderImg %}
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index - 1 }}" 
+       
+      {% if loop.first %}
+      class="active" aria-current="true"
+      {% endif %}
+      aria-label="{{ slide[2] }}"></button>
+      {% endfor %}
+    </div>
+    <div class="carousel-inner">
+      {% for slide in sliderImg %}
+        <div class="carousel-item 
+        {% if loop.first %}
+        active
+        {% endif %}
+        "> 
+          <img src="{{slide[1]}}" alt="{{slide[2]}}">
+          <div class="container">
+            <div class="carousel-caption 
+            {% if loop.index % 3 == 0 %}
+            text-end
+            {% elif loop.index % 3 == 1 %}
+            text-start
+            {% else %}
+            text-center
+            {% endif %}
+            ">
+              <h1 class="text-capitalize">{{slide[2]}}</h1>
+              <p class="lead">{{slide[3]}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</main>
+
+<div class="seperate"></div>
+
+<main class="cover-bg" style="background: url({{ url_for('static', filename='img/bg/bgDown0.png') }});">
+  <div class="container text-start">
+    <div class="row">
+      <div class="sectionMain col-md-8">
+        <h1><span class="fw-bolder text-primary text-uppercase">{{session.title}}</span></h1>
+        <figure>
+          <blockquote class="blockquote">
+            <p>“{{session.short}}”</p>
+          </blockquote>
+        </figure>
+      </div>
+      <img src="{{ url_for('static', filename='img/Home/img0.gif') }}" alt="teeth1" class="img-fluid col-md-4">
+    </div>
+  </div>
+</main>
+
+<div class="seperate"></div>
+
+<main class="cover-bg" style="background: url({{ url_for('static', filename='img/bg/bgUp0.png') }});">
+  <div class="container text-end">
+    <div class="row">
+      <img src="{{ url_for('static', filename='img/Home/img1.jpg') }}" class="img-fluid col-md-5">
+      <div class="sectionMain col-md-7">
+        <h1 class="text-dark text-uppercase">Why Choose to {{session.title}}?</h1>
+        <ul class="lead text-start list-group">
+           <li class="list-group-item-action list p-1 list-unstyled"><i class="bi bi-caret-right-fill"></i>Extensive range of dental treatments</li>
+           <li class="list-group-item-action list p-1 list-unstyled"><i class="bi bi-caret-right-fill"></i>We will give you a clear and transparent breakdown of your treatment plan</li>
+           <li class="list-group-item-action list p-1 list-unstyled"><i class="bi bi-caret-right-fill"></i>Early morning and late evening appointments (8am-8pm Mon-Thurs, 8am-5.30pm Fridays, every second Saturday)</li>
+          <li class="list-group-item-action list p-1 list-unstyled"><i class="bi bi-caret-right-fill"></i>Sedation for nervous patients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="seperate"></div>
+
+<main class="{% if RatesTable|length == 0 %}d-none{% endif %} p-5 cover-bg" style="background: url({{ url_for('static', filename='img/bg/bg.webp') }});">
+  <div class="p-5 container text-center">
+    <h1 class="fw-bolder text-primary text-uppercase">What Patients Are Saying</h1>
+    <div id="carouselContent" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+          {% for rate in RatesTable %}
+            <div class="carousel-item carousel-H text-center 
+                        {% if loop.first %}
+                        active
+                        {% endif %}
+            p-4">
+              <i class="bi bi-chat-square-quote fs-2"></i>
+              <figure>
+                <blockquote class="lead fw-bolder blockquote">
+                  <p>“{{ rate[1] }}.”</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                  <cite title="Source Title">{{ rate[2] }}</cite>
+                </figcaption>
+              </figure>
+            </div>
+          {% endfor %}
+      </div>
+   </div>
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselContent" data-bs-slide="prev">
+    <span class="bi bi-caret-left-fill text-dark fs-1" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselContent" data-bs-slide="next">
+    <span class="bi bi-caret-right-fill text-dark fs-1" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  </div>
+</main>
+
+<div class="{% if RatesTable|length == 0 %}d-none{% endif %} seperate"></div>
+
+<main class="cover-bg {% if TreatData|length == 0 %}d-none{% endif %}" style="background: url({{ url_for('static', filename='img/bg/bgDown1.svg') }});" id="services">  
+  <div class="p-5 container text-center">
+    <h1 class="fw-bolder text-dark text-uppercase">TREATMENTS AND SERVICES</h1>
+    <div class="p-3"></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for treat in TreatData %}
+      <div class="col">
+        <div class="card">
+          <img style="max-height : 150px" src="{{ treat[1] }}" class="card-img-top" alt="{{treat[1]}}">
+          <div class="card-body">
+            <h5 class="card-title">{{treat[2]}}</h5>
+            <p class="card-text">{{treat[5]}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">${{treat[3]}}</li>
+            <li class="list-group-item">{{treat[4]}} Sessions</li>
+          </ul>
+          <div class="card-body">
+            <style>
+              book[disabled] {
+                pointer-events: none;
+            }
+            </style>
+            {% if session.username %} 
+              <a href="/Appointment" class="btn btn-primary text-center card-link">Book an Appointment</a>
+            {% else %}
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="You must be a user!">
+              <a style="pointer-events: none;" href="/Appointment" class="btn btn-primary card-link disabled">Book an Appointment</a>
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+<div class="{% if TreatData|length == 0 %}d-none{% endif %} seperate"></div>
+
+<main class="cover-bg" style="background: url({{ url_for('static', filename='img/bg/bgUp1.svg') }});">
+  <div class="container">
+    <div class="row">
+      {% if not session.username %}
+      <form id="login" action="/" method="post" class="mt-4 mt-sm-1 col-md-6 p-sm-5 needs-validation">
+        <h2 class="fw-bolder text-primary text-uppercase">Login</h2>
+        <div class="form-group">
+          <label for="Email1" class="form-label">Email address</label>
+          <input name="email" id="email" type="email" class="form-control" id="Email1" aria-describedby="emailHelp" placeholder="Enter email" required>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input id="password" name="password" type="password" class="form-control" id="Password" aria-describedby="passwordHelpInline" placeholder="Password" required>
+          <span id="passwordHelpInline" class="form-text">
+            Must be 8-20 characters long.
+          </span>
+        </div>
+        <div class="form-check">
+          <input id="doctor" name="doctor" type="checkbox" class="form-check-input">
+          <label class="form-check-label" for="doctor">Are you dentist ?</label>
+        </div>
+        <div class="p-1"></div>
+        <button class="btn btn-primary" type="submit">Sign In</button>
+        <small class="form-text text-muted"><a href="/register">Dont't have an account?</a></small>
+        <p class="text-center {{registered}}">{{ msg }}</p>
+      </form>
+      {% endif %}
+      <div class="mt-4 
+      {% if session.username %}
+      text-center col-md-12
+      {% else %}
+      col-md-6
+      {% endif %}
+      mt-sm-1 p-sm-5 mb-4 mb-sm-1">
+        <h2 class="fw-bolder text-primary text-uppercase">Contact Information</h2>
+        <p>
+            <span class="fw-bolder">Mobile:</span><br/>
+            {{session.phone}}
+            <br/> <br/>
+
+            <span class="fw-bolder">Address:</span><br/>
+            {{session.address}}<br /><br />
+            
+            <span class="fw-bolder">Email:</span><br />
+            <a href="mailto:{{email}}">{{session.email}}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

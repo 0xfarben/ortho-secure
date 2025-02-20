@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+  <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="bg-light p-5 container">
+    <h1 class="fw-bolder text-primary mb-4 text-center text-uppercase">REQUEST AN APPOINTMENT!</h1>
+    {% if session.username %}
+      <div class="offset-md-1  col-md-10">
+        <h5 class="mb-4">Write information of your patient:</h5>
+        <form action="{{ url_for('Appointment') }}" method="POST" class="row g-3 needs-validation" novalidate>
+          <div class="col-md-12">
+            <label for="SSN" class="form-label">SSN</label>
+            <input name="SSN" id="SSN" type="int" class="form-control" placeholder="SSN" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please write an invalid SSN.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationFName" class="form-label">First name</label>
+            <input name="FName" id="FName" type="text" class="form-control" placeholder="First name" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please write an invalid first name.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationFName" class="form-label">Middle name</label>
+            <input name="MidName" id="MidName" type="text" class="form-control" placeholder="Middle name" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please write an invalid middle name.
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationLName" class="form-label">Last name</label>
+            <input name="LName" id="LName" type="text" class="form-control" placeholder="Last name" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please write an invalid last name.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationAge" class="form-label">Age</label>
+            <input name="Age" id="Age" type="number" class="form-control" placeholder="Age" required>
+            <div class="valid-feedback">
+              Good!
+            </div>
+            <div class="invalid-feedback">
+              Please write an invalid Age.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationGender" class="form-label">Gender</label>
+            <select name="Gender" id="Gender" class="form-select" id="validationGender" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Please select a valid Gender.
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label for="validationDoctor" class="form-label">Availables Doctors</label>
+            <select id="Doctor" name="Doctor" class="form-select" id="validationDoctor" required>
+              <option selected disabled value="">Choose...</option>
+              {% for doctor in DoctorsData %}
+                <option>{{ doctor[2] + " " + doctor[3] + " " + doctor[4] }}</option>
+              {% endfor %}
+            </select>
+            <div class="valid-feedback">
+              Good!
+            </div>
+            <div class="invalid-feedback">
+              Please select a Doctor.
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label for="validationService" class="form-label">Service</label>
+            <select name="Service" id="Service" class="form-select" id="validationService" required>
+              <option selected disabled value="">Choose...</option>
+              {% for Treat in TreatData %}
+                <option>{{ Treat[2] }}</option>
+              {% endfor %}
+            </select>
+            <div class="valid-feedback">
+              Good!
+            </div>
+            <div class="invalid-feedback">
+              Please select a Service.
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">The Cost </label>
+            <input readonly class="form-control" type="text" value="{{cost[0]}}$">
+          </div>
+          <div class="col-md-4">
+            <button role="button" class="button-9 btn btn-primary" type="submit">Book Appointment</button>
+          </div>
+          <p class="text-center {{PassOrNot}}">{{ msg }}</p>
+        </form>
+      </div>
+    {% else %}
+        <h3>You must be a user !</h3>
+        <a href="{{ url_for('register') }}" class="btn">Dont't have an account?</a>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock %}

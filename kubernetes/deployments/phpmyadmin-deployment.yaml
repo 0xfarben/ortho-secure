@@ -1,0 +1,101 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: phpmyadmin-deployment
+#   labels:
+#     app: phpmyadmin-orthosecure
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: phpmyadmin-orthosecure
+#   template:
+#     metadata:
+#       labels:
+#         app: phpmyadmin-orthosecure
+#     spec:
+#       containers:
+#         - name: pma-orthosecure
+#           image: phpmyadmin/phpmyadmin:latest
+#           ports:
+#             - containerPort: 80 # port is corect? ya okay
+#           env:
+#             - name: PMA_HOST
+#               value: "mysql-orthosecure"
+#             - name: PMA_PORT
+#               value: "3306"
+#             - name: MYSQL_ROOT_PASSWORD
+#               valueFrom:
+#                 secretKeyRef:
+#                   name: mysql-secrets
+#                   key: MYSQL_ROOT_PASSWORD 
+#           resources:
+#             limits:
+#               memory: "512Mi"
+#               cpu: "500m"
+#             requests:
+#               memory: "256Mi"
+#               cpu: "250m"
+#           # readinessProbe:
+#           #   httpGet:
+#           #     path: /status
+#           #     port: 80
+#           #   initialDelaySeconds: 15
+#           #   periodSeconds: 20
+#           # livenessProbe:
+#           #   httpGet:
+#           #     path: /status
+#           #     port: 80
+#           #   initialDelaySeconds: 45
+#           #   periodSeconds: 60
+
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin-deployment
+  labels:
+    app: phpmyadmin-orthosecure
+    environment: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin-orthosecure
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin-orthosecure
+        environment: production
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: pma-orthosecure
+          image: phpmyadmin/phpmyadmin:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: PMA_HOST
+              value: "mysql-orthosecure"
+            - name: PMA_PORT
+              value: "3306"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secrets
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+
+
+# Notes:
+
+# Probes: Adjust path if phpMyAdmin's health endpoint differs.
+# Dependencies: Kubernetes doesn't have a direct equivalent to depends_on. The readiness probes ensure that phpMyAdmin waits for MySQL to be ready.

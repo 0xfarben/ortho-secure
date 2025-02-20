@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: secure-namespace
+  name: restricted-deployer  # Name of the role
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "deployments"]  # Resources affected by the role
+    verbs: ["create", "get", "list"]   # Actions allowed

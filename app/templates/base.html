@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% block main %}
+
+    <header>
+        <nav style="z-index: 100; opacity: .96;box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;" class="p-lg-0 p-1 navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand text-capitalize" href="./">
+                    <img class="bi" height="24" src="{{ url_for('static', filename='img/icon/icon.png') }}" alt="{{session.title}}" title="{{session.title}}" />
+                    <span class="fw-bolder text-primary">{{session.title}}</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ournavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="ournavbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item nav-link {{ActiveHome}}"><a class="nav-link" href="./">Home</a></li>
+                        <li class="nav-item nav-link {{ActiveAbout}}"><a class="nav-link" href="./About">About Us</a></li>
+                        <li class="nav-item nav-link {{ActiveDoctors}}"><a class="nav-link" href="/Doctors">Our Dentists</a></li>
+                        <li class="nav-item nav-link"><a class="nav-link" href="./#services">Our Services</a></li>
+                        <li class="nav-item nav-link {{ActiveContact}}"><a class="nav-link" href="./Contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    {% if session.username %}
+                        <small class="fs-6 m-3">Hi <a href="/profile" class="link-primary">{{session.username}}</a></small>
+                        <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
+                    {% else %}
+                        <a class="btn btn-primary text-decoration-none" href="./#login">Login</a>      
+                        <a href="{{ url_for('register') }}" class="btn">Dont't have an account?</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="clearfix"></div>
+    
+    {% block body %}
+    {% endblock %}
+    
+    <div class="clearfix"></div>
+
+{% endblock %}

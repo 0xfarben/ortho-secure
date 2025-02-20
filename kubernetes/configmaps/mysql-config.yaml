@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+data:
+  MYSQL_HOST: mysql_db
+  MYSQL_DATABASE: dbortho
+  FLASK_ENV: development
+  MYSQL_PORT: "3306"
+

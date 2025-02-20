@@ -1,0 +1,39 @@
+services:
+  mysql_db:
+    build: ./db/
+    container_name: db_orthosecure
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - ".env"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - orthosecure_network
+
+  orthosecure-app:
+    build: ./app/
+    container_name: app_orthosecure
+    env_file:
+      - ".env"
+    ports:
+      - "5000:5000"
+    command: sh -c "./wait-for.sh mysql_db python main.py"
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - orthosecure_network
+
+volumes:
+  mysql_data:
+
+networks:
+  orthosecure_network:
+

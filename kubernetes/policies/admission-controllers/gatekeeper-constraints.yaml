@@ -1,0 +1,85 @@
+# ConstraintTemplate: Defines the reusable logic for enforcing required labels
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredlabels  # Name of the template
+spec:
+  terms:
+    - name: "required_labels"
+      description: "List of required labels"
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredLabels  # Kind name for constraints created from this template
+  targets:
+    - target: admission.k8s.gatekeeper.sh  # Specifies that this template applies to Gatekeeper
+      rego: |  # Rego policy logic
+        package k8srequiredlabels
+
+        # Define a violation if required labels are missing
+        violation[{"msg": msg}] {
+          required_labels := {"app", "environment"}  # List of required labels
+
+          # Find missing labels by checking if they are not present in the resource's metadata
+          missing := {label | required_labels[label] && not input.review.object.metadata.labels[label]}
+
+          # If there are any missing labels, trigger a violation
+          count(missing) > 0
+
+          # Construct the violation message
+          msg := sprintf("Missing required labels: %v", [missing])
+        }
+terms:
+  - name: required_labels  # Refers to the terms defined in the ConstraintTemplate
+    values:
+      app: "app"  # Default value for the app label
+      environment: "environment"  # Default value for the environment label
+---
+
+# Constraint: Enforces the policy defined in the ConstraintTemplate
+apiVersion: constraints.gatekeeper.sh/v1
+kind: K8sRequiredLabels  # Kind defined in the ConstraintTemplate
+metadata:
+  name: require-app-and-environment-labels  # Name of the constraint
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]  # Match resources in the core API group
+        kinds: ["Pod", "Deployment"]  # Apply the policy to Pods and Deployments
+  parameters:
+    labels: ["app", "environment"]  # List of required labels
+terms:
+  - name: required_labels  # Refers to the terms defined in the ConstraintTemplate
+    values:
+      app: "app"  # Default value for the app label
+      environment: "environment"  # Default value for the environment label
+
+
+
+
+
+
+
+
+
+
+# now we can understand biok
+# kubectl apply -f kubernetes/admission-controllers/gatekeeper-constraints.yaml
+
+
+
+# Explanation:
+# ConstraintTemplate:
+# Defines the reusable logic for checking required labels using Rego {its a policy language for Gatekeeper}.
+# The violation rule identifies missing labels and generates a violation message.
+
+# Constraint:
+# Uses the ConstraintTemplate to enforce the policy on specific resources (Pods and Deployments).
+# Specifies the required labels (app and environment).
+
+# How It Works:
+# When a user tries to create or modify a Pod or Deployment, Gatekeeper checks if the required labels are present.
+# If any labels are missing, the request is rejected with a violation message.
+
+# okay u understood basically we are going to restrict labels for pods and deployments
+# ya got it👍

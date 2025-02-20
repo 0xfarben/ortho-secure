@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+    environment: production # extra label
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+        environment: production # extra label beacuse we are in productions stage now
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app-orthosecure
+          image: nidithvs/app_orthosecure:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-config
+          command: ["sh", "-c", "./wait-for.sh mysql-deployment python main.py"]
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

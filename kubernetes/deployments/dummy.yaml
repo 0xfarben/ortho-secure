@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invalid-one
+  labels:
+    team: devops  # Missing required labels: "app" and "environment"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      team: devops
+  template:
+    metadata:
+      labels:
+        team: devops  # Missing required labels: "app" and "environment" lets see later i am going now U carry on window will be open no close and goman. My sis will be ther ebro she iwll see u do. carory on okay next what ? check out all the policies are corect or not abd then we can go for next step. also check out gatekeeps \\
+        #what abt ci cid >? that we will integrate later okay okay is there any other alternayive? gatekeeper should install password needed
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: invalid-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+            requests:
+              memory: "128Mi"
+              cpu: "125m"

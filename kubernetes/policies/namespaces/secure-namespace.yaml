@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secure-namespace
+  labels:
+    pod-security.kubernetes.io/enforce: restricted  # Enforce the restricted policy
+    pod-security.kubernetes.io/audit: restricted   # Audit the restricted policy
+    pod-security.kubernetes.io/warn: restricted    # Warn about restricted policy
+  annotations:
+    description: "Namespace for secure workloads with restricted pod security policies"
+    owner: "Tayyab Qadri"
+    environment: "production"

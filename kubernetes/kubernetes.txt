@@ -1,0 +1,311 @@
+Translating docker-compose.yml to Kubernetes Manifests
+We'll convert each service defined in  docker-compose.yml into corresponding Kubernetes resources. 
+The main components we'll create are:
+
+# Deployments: Define the desired state for your pods.
+# Services: Expose your pods to the network.
+# PersistentVolumeClaims (PVCs): Manage storage.
+# ConfigMaps and Secrets: Handle configuration data and sensitive information.
+# Health Checks: Define readiness and liveness probes.
+
+# Explanation of Directories:
+
+# deployments/: Contains Deployment YAML files for your applications/services.
+# services/: Contains Service YAML files to expose your Deployments.
+# pvc/: Holds PersistentVolumeClaim YAML files for storage needs.
+# configmaps/: Stores ConfigMap YAML files for non-sensitive configuration data.
+# secrets/: Stores Secret YAML files for sensitive information like passwords.
+
+# Applying the Manifests
+# Step 1: Ensure all your YAML files are correctly populated with the necessary configurations and that image references are accurate.
+# Step 2: Apply the manifests in the following order to manage dependencies effectively:
+
+after each kubectl command u can log into the dashboard by running simply "minikube dashboard+ in the terminal.
+
+
+
+
+# ConfigMaps: +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f kubernetes/configmaps/
+
+--->
+ verify that your ConfigMaps were applied correctly, you can:
+
+Run “kubectl get configmaps” to confirm the ConfigMaps are listed.
+kubectl get configmaps
+
+Describe a specific ConfigMap for more detail:
+kubectl describe configmap app-config
+
+Check the logs of pods that use these ConfigMaps to ensure they read the configs successfully:
+kubectl logs <pod-name>
+
+
+
+# Secrets: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f kubernetes/secrets/
+
+----->
+1. List All Secrets
+
+Run the following command to list all secrets in the current namespace:
+kubectl get secrets
+
+Look for mysql-secrets in the output.
+Example output:
+NAME                  TYPE                                  DATA   AGE
+default-token-abcde   kubernetes.io/service-account-token   3      10m
+mysql-secrets         Opaque                                2      1m
+
+2. Describe the Secret
+Run the following command to get detailed information about the secret:
+
+kubectl describe secret mysql-secrets
+
+This will show metadata about the secret, such as its name, type, and the keys it contains.
+Example output:
+Name:         mysql-secrets
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+MYSQL_USER:     8 bytes
+MYSQL_PASSWORD: 12 bytes
+
+3. Check the Secret Data (Optional)
+If you want to inspect the actual values stored in the secret (base64-encoded), you can use the following command:
+
+kubectl get secret mysql-secrets -o yaml
+ok
+Example output:
+yaml
+Copy Code
+apiVersion: v1
+data:
+  MYSQL_USER: bXlzcWx1c2Vy  # base64-encoded value
+  MYSQL_PASSWORD: cGFzc3dvcmQ=  # base64-encoded value
+kind: Secret
+metadata:
+  name: mysql-secrets
+  namespace: default
+type: Opaque
+
+To decode the base64-encoded values, you can use the base64 command:
+
+echo "bXlzcWx1mVy" | base64 --decode
+Output: mysqluser
+
+
+
+# PersistentVolumeClaims: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f kubernetes/pvc/
+
+1. List All PVCs
+Run the following command to list all PersistentVolumeClaims in the current namespace:
+
+kubectl get pvc
+
+2. Describe the PVC
+Run the following command to get detailed information about the PVC:
+
+kubectl describe pvc <pvc-name>
+
+kubectl get pv
+
+4. Check if the PVC is Mounted in a Pod
+
+kubectl describe pod <pod-name>
+
+
+# Deployments: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f kubernetes/deployments/
+
+1. List Deployments
+Run the following command to list all deployments in the current namespace:
+
+kubectl get deployments
+
+2. Describe the Deployment
+Run the following command to get detailed information about the deployment:
+
+kubectl describe deployment <deployment-name>
+
+3. Check ReplicaSets
+Deployments manage ReplicaSets, so you can check if the ReplicaSet was created successfully:
+
+kubectl get rs
+
+4. Check Pods
+Deployments create pods, so you can check if the pods are running correctly:
+
+kubectl get pods
+
+5. Describe a Pod
+If the pods are not running as expected, describe one of the pods to get more details:
+
+kubectl describe pod <pod-name>
+
+6. Check Pod Logs
+If the pod is running but not behaving as expected, check the logs of the pod:
+
+kubectl logs <pod-name>
+
+7. Check Events for Errors
+If the deployment is not working as expected, check the events for more details:
+
+kubectl get events
+
+8. Check the Deployment's Health
+You can also check the rollout status of the deployment to ensure it was successfully rolled out:
+
+kubectl rollout status deployment/<deployment-name>
+
+9. Check if the Deployment is Exposed (Optional)
+If your deployment is exposed via a service, verify the service is working:
+
+kubectl get svc
+
+
+# Services: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+kubectl apply -f kubernetes/services/
+
+To verify that your Service was successfully created after running kubectl apply -f kubernetes/services/, follow these steps:
+
+1. List All Services
+Run the following command to list all services in the current namespace:
+
+kubectl get services
+
+
+2. Describe the Service
+Run the following command to get detailed information about the service:
+
+kubectl describe service <service-name>
+
+
+3. Check Endpoints
+To verify that the service is correctly linked to the pods, check the endpoints:
+
+kubectl get endpoints
+
+
+4. Check Pods Targeted by the Service
+The service uses a selector to target pods. Verify that the pods have the correct labels that match the service's selector:
+
+kubectl get pods --selector=<label-key>=<label-value>
+
+Replace <label-key> and <label-value> with the labels defined in your service's selector.
+Example:
+kubectl get pods --selector=app=mysql
+
+
+5. Test the Service
+You can test the service to ensure it is routing traffic correctly:
+
+[a] For ClusterIP Services
+
+Use kubectl exec to run a command inside a pod in the same namespace and test the service:
+kubectl exec -it <pod-name> -- curl <service-name>:<port>
+Replace <pod-name> with the name of a pod in the same namespace.
+Replace <service-name> with the name of your service (e.g., mysql-service).
+Replace <port> with the service's port (e.g., 3306).
+
+[b] For NodePort Services
+
+Get the NodePort from the service:
+kubectl get service <service-name>
+
+In this case, the NodePort is 30036.
+Access the service using the Node's IP and the NodePort:
+curl <node-ip>:<node-port>
+Replace <node-ip> with the IP address of a Kubernetes node.
+Replace <node-port> with the NodePort (e.g., 30036).
+
+[c] For LoadBalancer Services
+
+Get the external IP of the service:
+kubectl get service <service-name>
+Access the service using the external IP:
+curl <external-ip>:<port>
+Replace <external-ip> with the external IP of the service (e.g., 192.168.1.100).
+Replace <port> with the service's port (e.g., 3306).
+
+
+6. Check Events for Errors
+If the service is not working as expected, check the events for more details:
+kubectl get events
+Look for any errors or warnings related to the service.
+
+
+7. Check Logs of the Pods
+If the service is linked to pods, check the logs of the pods to ensure they are receiving traffic:
+kubectl logs <pod-name>
+Replace <pod-name> with the name of a pod targeted by the service.
+If all these checks pass, your service is successfully created and working as expected. 
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+# Alternatively, you can apply all manifests at once:
+
+kubectl apply -f kubernetes/
+
+
+Summary
+By following the above Kubernetes manifests, you can effectively transition your Docker Compose setup to Kubernetes. This setup ensures that your MySQL database, phpMyAdmin, and application service are correctly configured, scalable, and maintainable within a Kubernetes cluster.
+
+Key Steps:
+
+Create ConfigMaps and Secrets: Manage configuration and sensitive data separately.
+Define PersistentVolumeClaims: Ensure data persistence for your MySQL database.
+Set Up Deployments: Manage the desired state and scaling of your application pods.
+Expose Services: Allow internal and external access to your services.
+Apply Manifests: Deploy all configurations to your Kubernetes cluster.
+Verify and Monitor: Ensure everything is running smoothly and set up necessary monitoring tools.
+Additional Recommendations:
+
+Version Control: Keep your Kubernetes manifests under version control (e.g., Git) for better collaboration and change tracking.
+Helm Charts: Consider using Helm for managing complex deployments with templating capabilities.
+Automated Deployments: Integrate CI/CD pipelines to automate the deployment process, ensuring consistency and reducing manual errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Testing the Policies
+Admission Controller:
+Try creating a Pod or Deployment without the required labels (app and environment).
+The request should be rejected with a message like:
+Missing required labels: ["app", "environment"]
+
+Network Policy:
+Deploy two Pods: one with the label app: my-app and one without.
+Test connectivity between the Pods using curl or ping.
+Only Pods with the label app: my-app should be able to communicate.
+
+Pod Security Policy:
+Try creating a Pod that runs as root or uses a privileged container.
+The request should be rejected with a message indicating a violation of the Pod Security Policy.
+
+Final Notes
+These policies improve the security, consistency, and governance of your Kubernetes cluster.
+Regularly audit your cluster to ensure compliance with these policies.
+For Kubernetes 1.21+, consider migrating from Pod Security Policies to Pod Security Admission.

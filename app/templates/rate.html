@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+  <div style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" class="bg-light p-5 container">
+    <h1 class="fw-bolder text-primary mb-4 text-center text-uppercase"><i style="color: #ffd700; font-size: 30px;" class="bi bi-star-fill"></i> Rate Us <i style="color: #ffd700; font-size: 30px;" class="bi bi-star-fill"></i></h1>
+    {% if session.username %}
+      <div>
+        <form action="{{ url_for('RateUs') }}" method="POST" class="needs-validation row container" novalidate>
+          
+          <div class="row align-items-center">
+            <div class="col-lg-12">
+              <div class="col-auto">
+                <label for="rating" class="col-form-label fw-light">Rate Your Experience</label>
+              </div>
+              <div class="col-auto">
+                <input name="rating" id="rating" class="rating col-lg-8;" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5" style="--value:2.5;--starsize: 2.0rem;" type="range" value="2.5">
+              </div>
+            </div>
+            <div class="col-auto">
+              <span class="form-text fw-bold">
+                Are you Satisfied with the service?
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <div class="col-auto">
+              <textarea style="min-height: 150px;" name="message" id="message" type="text" class="form-control" required></textarea>
+            </div>
+            <div class="col-auto">
+              <span class="form-text fw-bold">
+                Tell us what we can improved
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <button role="button" class="button-9 btn btn-primary" type="submit">Rate</button>
+          </div>
+          <p class="text-center {{PassOrNot}}">{{ msg }}</p>
+        </form>
+      </div>
+    {% else %}
+        <h3>You must be a user !</h3>
+        <a href="{{ url_for('register') }}" class="btn">Dont't have an account?</a>
+    {% endif %}
+  </div>
+</main>
+
+{% endblock %}

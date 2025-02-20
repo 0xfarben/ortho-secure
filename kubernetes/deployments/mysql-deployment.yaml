@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql-orthosecure
+    environment: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-orthosecure
+  template:
+    metadata:
+      labels:
+        app: mysql-orthosecure
+        environment: production
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: db-orthosecure
+          image: nidithvs/db_orthosecure:latest
+          ports:
+            - containerPort: 3306
+          envFrom:
+            - configMapRef:
+                name: mysql-config
+            - secretRef:
+                name: mysql-secrets
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+              ephemeral-storage: "5Mi"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+              ephemeral-storage: "10Mi"
+          readinessProbe:
+            exec:
+              command: ["sh", "-c", "mysqladmin ping -h localhost -u $MYSQL_USER -p$MYSQL_PASSWORD"]
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            exec:
+              command: ["sh", "-c", "mysqladmin ping -h localhost -u $MYSQL_USER -p$MYSQL_PASSWORD"]
+            initialDelaySeconds: 30
+            periodSeconds: 30
+      volumes:
+        - name: mysql-storage
+          persistentVolumeClaim:
+            claimName: mysql-pvc
+
+
+
+
+# Notes:
+
+# Image: Ensure that your-registry/mysql_db:latest is accessible from your Kubernetes cluster. This typically means pushing your built Docker image to a container registry like Docker Hub, Google Container Registry, or a private registry.
+# Probes: Kubernetes doesn't support environment variable interpolation in probe command arrays directly. By using sh -c, we ensure that shell expansion occurs.
+# Security: Ensure your MySQL user has the necessary privileges and that passwords are secure.

@@ -1,0 +1,101 @@
+# apiVersion: policy/v1beta1
+# kind: PodSecurityPolicy
+# metadata:
+#   name: restricted-psp  # Name of the Pod Security Policy
+# spec:
+#   privileged: false  # Do not allow privileged Pods
+#   allowPrivilegeEscalation: false  # Prevent privilege escalation
+#   requiredDropCapabilities:
+#     - ALL  # Drop all Linux capabilities by default
+#   runAsUser:
+#     rule: MustRunAsNonRoot  # Enforce that containers must run as a non-root user
+#   seLinux:
+#     rule: RunAsAny  # Allow any SELinux context
+#   fsGroup:
+#     rule: MustRunAs  # Enforce a specific range for file system group IDs
+#     ranges:
+#       - min: 1
+#         max: 65535
+#   supplementalGroups:
+#     rule: MustRunAs  # Enforce a specific range for supplemental group IDs
+#     ranges:
+#       - min: 1
+#         max: 65535 # Allow groups in the range 1-65535
+#   volumes:
+#     - configMap  # Allow ConfigMap volumes
+#     - emptyDir   # Allow emptyDir volumes
+#     - secret     # Allow Secret volumes
+#     - persistentVolumeClaim  # Allow PVC volumes
+
+
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata: 
+  name: k8spsp
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sPSP
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            terms:
+              type: string
+              description: Terms for the Pod Security Policy
+              default: "Pod Security Policy terms"  # Ensure a default value is provided
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8spsp
+
+        # Violation when containers are running in privileged mode
+        violation[{"msg": msg}] {
+          input.review.object.spec.containers[_].securityContext.privileged == true
+          msg := "Privileged containers are not allowed"
+        }
+
+        # Violation when privilege escalation is allowed
+        violation[{"msg": msg}] {
+          input.review.object.spec.containers[_].securityContext.allowPrivilegeEscalation == true
+          msg := "Privilege escalation is not allowed"
+        }
+
+        # Violation when container does not run as a non-root user
+        violation[{"msg": msg}] {
+          not input.review.object.spec.containers[_].securityContext.runAsUser
+          msg := "Containers must run as a non-root user"
+        }
+
+        # Default terms for the Pod Security Policy (e.g., a human-readable
+        # policy description)
+        terms := input.parameters.terms  # Access the terms property defined in the constraint
+terms:
+  - name: k8spsp
+    value: "Pod Security Policy terms"
+
+
+# kubectl apply -f kubernetes/policies/pod-security-policy.yaml
+
+
+
+
+
+
+
+# Explanation:
+# Purpose:
+# Enforces security best practices for Pods.
+# Prevents privileged Pods and ensures containers run as non-root users.
+
+# Key Sections:
+# privileged: Disallows privileged Pods.
+# allowPrivilegeEscalation: Prevents processes from gaining additional privileges.
+# requiredDropCapabilities: Drops all Linux capabilities by default.
+# runAsUser: Ensures containers run as non-root users.
+# volumes: Restricts the types of volumes that can be used.
+
+# How It Works:
+# When a Pod is created, Kubernetes checks if it complies with this policy.
+# If the Pod violates any of the rules (e.g., runs as root), it is rejected.

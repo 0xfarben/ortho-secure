@@ -1,0 +1,16 @@
+# PersistentVolumeClaims (PVC)
+# Purpose: Request storage resources for your applications.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  labels:
+    app: mysql-orthosecure
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi  # Adjust storage size as needed 20gb storage of our pc will take ? no will create a volumre for ou app
+      

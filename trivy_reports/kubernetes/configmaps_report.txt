@@ -1,0 +1,14 @@
+
+mysql-config.yaml (kubernetes)
+==============================
+Tests: 62 (SUCCESSES: 61, FAILURES: 1)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+AVD-KSV-01010 (MEDIUM): ConfigMap 'mysql-config' in 'default' namespace stores sensitive contents in key(s) or value(s) '{"MYSQL_PORT"}'
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+Storing sensitive content such as usernames and email addresses in configMaps is unsafe
+
+See https://avd.aquasec.com/misconfig/avd-ksv-01010
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+

@@ -1,0 +1,15 @@
+# requirements.txt
+black
+flask
+typing
+python-dotenv
+dnspython
+flask
+mysql.connector
+werkzeug
+flask_wtf
+wtforms
+flask_mail
+setuptools
+pathlib
+gunicorn
