@@ -48,8 +48,8 @@ Ensure you have the following installed:
 1. Clone the repository:
    ```sh![download](https://github.com/user-attachments/assets/e81651ca-dc07-43b6-add0-174718a46da6)
 
-   git clone https://your-repository-url.git
-   cd orthosecure-main
+   git clone https://github.com/thayeeb9211/ortho-secure.git
+   cd ortho-secure
    ```
 2. Set up environment variables:
    ```sh
