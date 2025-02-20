@@ -89,8 +89,6 @@ We welcome contributions! Please follow our guidelines:
 - Commit changes and push to GitHub.
 - Submit a pull request.
 
-## License
-This project is licensed under the terms specified in the `LICENSE` file.
 
 ## 🛠️ Author & Community  
 
@@ -114,3 +112,5 @@ https://data-driven-portfolio-s3q1onv.gamma.site/
 ---
 **OrthoSecure - Securing Containers, Simplifying Security.** 🚀
 
+## License
+This project is licensed under the terms specified in the `LICENSE` file.
