@@ -53,8 +53,70 @@ Ensure you have the following installed:
 - AWS Account and CLI configured
 - Terraform CLI configured
 
+# Security-Focused DevSecOps Tool Implementation 🚀
 
-# Security-Focused DevSecOps Implementation
+Security is a top priority in this project. Below are the DevSecOps security tools integrated into the development pipeline to ensure code quality, vulnerability detection, and secure infrastructure management.
+
+1️⃣ Trivy - Container & Dependency Scanning 🔍
+
+Why it's used?
+Trivy is an open-source vulnerability scanner used to scan Docker images, file systems, and dependencies for security vulnerabilities.
+It provides CVE (Common Vulnerabilities and Exposures) reports to ensure the container images are secure before deployment.
+
+Benefits:
+   ✅ Fast and accurate vulnerability scanning.
+   ✅ Seamlessly integrates with GitLab CI/CD.
+   ✅ Helps maintain compliance and security best practices.
+
+2️⃣ SonarQube - Static Code Analysis 🛠️
+
+Why it's used?
+SonarQube is used to perform static code analysis to detect bugs, vulnerabilities, and maintainability issues.
+It helps enforce coding standards and security best practices.
+Benefits:
+✅ Detects security flaws like SQL injection and XSS.✅ Improves code maintainability and readability.✅ Provides in-depth security insights for developers.
+
+3️⃣ Bandit - Python Security Linter 🐍
+
+Why it's used?
+Bandit is a security linter specifically for Python code, helping identify security vulnerabilities in Python scripts and applications.
+It scans the code for common security issues such as hardcoded passwords and insecure function usage.
+Benefits:
+✅ Helps catch security flaws early in development.✅ Ensures Python code adheres to security best practices.✅ Integrates easily with CI/CD pipelines for automated checks.
+
+4️⃣ Black - Python Code Formatter 🎨
+
+Why it's used?
+Black is an opinionated Python code formatter that ensures consistent and readable code.
+It eliminates syntax-related security issues by enforcing a uniform coding style.
+Benefits:
+✅ Improves code readability and maintainability.✅ Reduces syntax-related security vulnerabilities.✅ Makes collaboration easier by enforcing a consistent format.
+
+5️⃣ Terraform - Infrastructure as Code (IaC) 🏗️
+Why it's used?
+Terraform is used to manage infrastructure as code, enabling automated deployment and management of cloud resources.
+It ensures reproducibility, consistency, and security in infrastructure provisioning.
+Benefits:
+✅ Enables version control and automation of infrastructure.✅ Reduces human errors and misconfigurations.✅ Ensures security by enforcing controlled infrastructure deployment.
+
+6️⃣ Kubernetes - Container Orchestration ⚡
+
+Why it's used?
+Kubernetes manages containerized applications by automating deployment, scaling, and operations.
+It ensures high availability, load balancing, and secure container orchestration.
+Benefits:
+✅ Efficient container management with automated scaling.✅ Built-in security policies and access controls.✅ Provides resilience and fault tolerance for applications.
+
+7️⃣ HashiCorp Vault - Secrets Management 🔑
+
+Why it's used?
+HashiCorp Vault is used for securely storing and managing sensitive data such as API keys, credentials, and certificates.
+It integrates with Kubernetes to inject secrets into containers securely.
+Benefits:
+✅ Centralized secrets management with access control.✅ Protects sensitive data with encryption.✅ Provides dynamic secrets, reducing exposure risk.
+
+These security tools work together to create a robust DevSecOps pipeline, ensuring security at every stage of development. 🚀💡
+
 
 ### Installation
 1. Clone the repository:
