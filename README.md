@@ -1,9 +1,15 @@
-# OrthoSecure
+![image](https://github.com/user-attachments/assets/408c4d79-ad75-4880-8da9-1d8cdb692e4c)# OrthoSecure
 
 ## Overview
+Orthosecure is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its
+user-friendly interface and powerful administrative panel, Orthosecure empowers dental practices to efficiently manage appointments, patient records, and clinic operations.
 OrthoSecure is a robust and secure application designed to enhance security and compliance within containerized environments. It leverages cutting-edge technologies to monitor, analyze, and secure workloads in real-time.
 
 ## Features
+- **Appointment Booking System:** Allows patients to book, modify, or cancel appointments online with ease.
+- **Admin Panel:** Provides clinic administrators with full control over scheduling, patient records, and appointment history.
+- **User Authentication:** Secure patient and admin login with session-based management.
+- **Responsive Design:** Ensures seamless usability across all devices, including desktops, tablets, and mobile phones.
 - **Container Security:** Implements security best practices to safeguard Docker-based environments.
 - **Automated Scanning:** Uses SonarQube and other tools for vulnerability detection.
 - **CI/CD Integration:** Seamless integration with GitLab CI/CD pipeline.
@@ -14,9 +20,9 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 This project was Contributed by 
 
-1.  **[Nidith VS](https://github.com/0xfarben)** **[Linkedin Link](https://www.linkedin.com/in/nidith/)**
-2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**  **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
-3.  **[Satish Biradar](https://github.com/satishbiradar0099)**  **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
+1.  **[Nidith VS](https://github.com/0xfarben)**      **[Linkedin Link](https://www.linkedin.com/in/nidith/)**
+2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**       **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
+3.  **[Satish Biradar](https://github.com/satishbiradar0099)**      **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
    
 # What is DevSecOps 
 DevSecOps focuses on security automation, testing and enforcement during DevOps - Release - SDLC cycles. The whole meaning behind this methodology is connecting together Development, Security and Operations. DevSecOps is methodology providing different methods, techniques and processes backed mainly with tooling focusing on developer / security experience. 
