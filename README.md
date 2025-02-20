@@ -14,7 +14,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 This project was Contributed by 
 
-1.  **[Nidith VS](https://github.com/thayeeb9211/)**
+1.  **[Nidith VS](https://github.com/0xfarben)**
 2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**
 3.  **[Satish Biradar](https://github.com/thayeeb9211/)**
    
