@@ -78,12 +78,13 @@ Security is a top priority in this project. Below are the DevSecOps security too
          ✅ Seamlessly integrates with GitLab CI/CD.
          ✅ Helps maintain compliance and security best practices.
 
-## 2️⃣ SonarQube - Static Code Analysis in GITLAB and Ci/CD 🛠️
+## 2️⃣ SonarQube & Static Code Analysis in GITLAB with Ci/CD 🛠️
 
-### Results of Auto-Enabling the SAST security Check on GITLAB
+### Results of Auto-Enabling the SAST and IaC security Check on GITLAB
    ![image](https://github.com/user-attachments/assets/b916bb90-5248-4208-b0e4-d0f28d252c51)
    ![image](https://github.com/user-attachments/assets/013531a8-5bd4-4e4b-94e2-bba995da995d)
-   
+   ![image](https://github.com/user-attachments/assets/f30230f5-98aa-4bde-8000-7a3ae817e2c0)
+
 ### Results of SonarQube Dashboard for Scanning full source code
    ![image](https://github.com/user-attachments/assets/11b19c65-6778-4a14-b06e-f3bc43fa418a)
 
