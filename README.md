@@ -15,6 +15,10 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 - **Ease of Deployment:** Simple setup with Docker and Kubernetes.
 - **Policy Enforcement:** Implements security policies using Falco and other monitoring tools.
 
+## Reports folder
+
+we have a dedicated Reports folder which explains the overall project with ease. Make sure you do check it before you proceed.
+
 ## Project Team Members
 
 This project was Contributed by 
