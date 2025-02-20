@@ -103,8 +103,8 @@ Security is a top priority in this project. Below are the DevSecOps security too
 ## 5️⃣ Terraform - Infrastructure as Code (IaC) 🏗️
 
    ![image](https://github.com/user-attachments/assets/19d62bd1-88f0-46d0-b5b8-1d3acaa79e10)
-   ![image](https://github.com/user-attachments/assets/b71f283b-3ba8-4904-a9f6-356c035fcab1)
-   ![image](https://github.com/user-attachments/assets/a4c3fb5f-f51e-46eb-844c-5f10635e43e2)
+   ![image](https://github.com/user-attachments/assets/b431662a-32fc-473f-9c46-daafa5401444)
+   ![image](https://github.com/user-attachments/assets/aaeb7ac0-6e3d-4ea4-9515-29da89f40953)
 
       Why it's used?
       Terraform is used to manage infrastructure as code, enabling automated deployment and management of cloud resources.
