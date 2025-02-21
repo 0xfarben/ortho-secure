@@ -195,7 +195,7 @@ Security is a top priority in this project. Below are the DevSecOps security too
    ```
 4. Run SAST scans by ensuring it has sonarsacnner [properties configured]:
    ```sh
-   make sure your Sonar Scanner confi properties are like this -- >
+   make sure your Sonar Scanner config properties are like this -- >
      sonar.projectKey=nidith_orthosecure_03ac60c4-e7f9-4f33-b330-4f90a86cc655
      sonar.token=<your sonarqube token>
      sonar.sources=.
