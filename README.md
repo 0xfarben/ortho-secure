@@ -29,7 +29,7 @@ we have a dedicated Reports folder which explains the overall project with ease.
 
 ## Project Team Members
 
-1.  **[Nidith VS](https://github.com/0xfarben)**      **[Linkedin Link](https://www.linkedin.com/in/nidith/)**
+1.  **[Mohammad Thayeeb Shareef](https://github.com/thayeeb9211)**      **[Linkedin Link](https://www.linkedin.com/in/mohammed-thayeeb-shariff-2b614b2b2)**
 2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**       **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
 3.  **[Satish Biradar](https://github.com/satishbiradar0099)**      **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
    
