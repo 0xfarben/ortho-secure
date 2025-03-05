@@ -29,8 +29,6 @@ we have a dedicated Reports folder which explains the overall project with ease.
 
 ## Project Team Members
 
-This project was Contributed by 
-
 1.  **[Nidith VS](https://github.com/0xfarben)**      **[Linkedin Link](https://www.linkedin.com/in/nidith/)**
 2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**       **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
 3.  **[Satish Biradar](https://github.com/satishbiradar0099)**      **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
