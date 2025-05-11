@@ -209,27 +209,10 @@ Security is a top priority in this project. Below are the DevSecOps security too
 ## CI/CD Integration
 OrthoSecure integrates with GitLab CI/CD using `.gitlab-ci.yml`, ensuring continuous security analysis and compliance checks.
 
-## 🛠️ Author & Community  
-
-This project is crafted by **[Mohammed Thayeeb Shariff](https://github.com/thayeeb9211/)** 💡 
-I’d love to hear your feedback! Feel free to share your thoughts.  
-   
-📧 **Connect with me:**
-
-- **LinkedIn**: [Mohammed Thayeeb Shariff](https://www.linkedin.com/in/mohammed-thayeeb-shariff-2b614b2b2/)  
-
----
 
 ## ⭐ Support the Project  
 
 If you found this helpful, consider **starring** ⭐ the repository and sharing it with your network! 🚀  
-
-### 📢 Stay Connected  
-
-https://data-driven-portfolio-s3q1onv.gamma.site/
-
----
-**OrthoSecure - Securing Containers, Simplifying Security.** 🚀
 
 ## License
 This project is licensed under the terms specified in the `LICENSE` file.
