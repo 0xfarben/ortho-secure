@@ -160,9 +160,9 @@ Security is a top priority in this project. Below are the DevSecOps security too
    ```sh
 
    [Make sure you create a .env file and add up your values in .env]
-   MYSQL_HOST=<your host name>
-   MYSQL_DATABASE=<your DB name>
-   MYSQL_USER=<your username>
+   MYSQL_HOST=localhost
+   MYSQL_DATABASE=dbortho
+   MYSQL_USER=<your username> # admin
    MYSQL_PASSWORD=<Mysql password>
    MYSQL_ROOT_PASSWORD=<Root password>
    FLASK_ENV=development
