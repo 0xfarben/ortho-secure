@@ -153,7 +153,7 @@ Security is a top priority in this project. Below are the DevSecOps security too
 1. Clone the repository:
    ```sh![download](https://github.com/user-attachments/assets/e81651ca-dc07-43b6-add0-174718a46da6)
 
-   git clone https://github.com/thayeeb9211/ortho-secure.git
+   git clone https://github.com/0xfarben/ortho-secure.git
    cd ortho-secure
    ```
 2. Set up environment variables and sonar properties:
