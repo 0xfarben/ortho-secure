@@ -156,7 +156,7 @@ Security is a top priority in this project. Below are the DevSecOps security too
    git clone https://github.com/0xfarben/ortho-secure.git
    cd ortho-secure
    ```
-2. Set up environment variables and sonar properties:
+2. Set up environment variables and sonar properties [NOTE: Place this in app folder]:
    ```sh
 
    [Make sure you create a .env file and add up your values in .env]
