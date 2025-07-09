@@ -23,8 +23,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Add wait-for script
-COPY wait-for.sh /wait-for.sh
-RUN chmod +x /wait-for.sh
+COPY wait-for.sh /app/wait-for.sh
+RUN chmod +x /app/wait-for.sh
 
 # Set Python path for the app
 ENV PYTHONPATH=/app
