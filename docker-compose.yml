@@ -23,7 +23,7 @@ services:
     env_file:
       - ".env"
     ports:
-      - "41050:5000"
+      - "5000:5000"
     command: sh -c "ls -l /app && ./wait-for.sh mysql_db python main.py"
     depends_on:
       mysql_db:
