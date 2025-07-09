@@ -153,16 +153,16 @@ Security is a top priority in this project. Below are the DevSecOps security too
 1. Clone the repository:
    ```sh![download](https://github.com/user-attachments/assets/e81651ca-dc07-43b6-add0-174718a46da6)
 
-   git clone https://github.com/thayeeb9211/ortho-secure.git
+   git clone https://github.com/0xfarben/ortho-secure.git
    cd ortho-secure
    ```
-2. Set up environment variables and sonar properties:
+2. Set up environment variables and sonar properties [NOTE: Place this in app folder]:
    ```sh
 
    [Make sure you create a .env file and add up your values in .env]
-   MYSQL_HOST=<your host name>
-   MYSQL_DATABASE=<your DB name>
-   MYSQL_USER=<your username>
+   MYSQL_HOST=localhost
+   MYSQL_DATABASE=dbortho
+   MYSQL_USER=<your username> # admin
    MYSQL_PASSWORD=<Mysql password>
    MYSQL_ROOT_PASSWORD=<Root password>
    FLASK_ENV=development
