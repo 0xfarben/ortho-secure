@@ -4,7 +4,7 @@ import json
 import string
 import random
 from pathlib import Path
-# from flask_mail import Mail, Message
+from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 from database import mysql_connector, retrive_tables
 from flask import Flask, render_template, request, redirect, url_for, session, Response
