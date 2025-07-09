@@ -6,6 +6,7 @@ python-dotenv
 dnspython
 flask
 mysql.connector
+mysql-connector-python
 werkzeug
 flask_wtf
 wtforms

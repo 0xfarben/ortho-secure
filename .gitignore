@@ -35,3 +35,29 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+.env
+# Ignore all environment variable files
+.env
+.env.*
+.env.docker
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VSCode and other IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Docker artifacts
+*.pid
+*.log
+docker-compose.override.yml
+
+# System files
+.DS_Store
+Thumbs.db

@@ -4,7 +4,7 @@ import json
 import string
 import random
 from pathlib import Path
-from flask_mail import Mail, Message
+# from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 from database import mysql_connector, retrive_tables
 from flask import Flask, render_template, request, redirect, url_for, session, Response
@@ -22,7 +22,19 @@ def get_random_number():
 
 #--------------------------------------------------------------------------#
 # Connecting with Database
-mydb, mycursor = mysql_connector()
+# mydb, mycursor = mysql_connector()
+mydb = None
+mycursor = None
+
+def init_db():
+    global mydb, mycursor
+    if mydb is None or mycursor is None:
+        mydb, mycursor = mysql_connector()
+        if mydb is None:
+            raise RuntimeError("Database connection failed")
+    return mydb, mycursor
+
+mydb, mycursor = init_db()
 
 """Retrive Database Tables"""
 db_tables = retrive_tables(mycursor)
