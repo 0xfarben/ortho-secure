@@ -160,7 +160,7 @@ Security is a top priority in this project. Below are the DevSecOps security too
    ```sh
 
    [Make sure you create a .env file and add up your values in .env]
-   MYSQL_HOST=localhost
+   MYSQL_HOST=name_of_the_mysql_service_in_compose_file(mysql_db)
    MYSQL_DATABASE=dbortho
    MYSQL_USER=<your username> # admin
    MYSQL_PASSWORD=<Mysql password>
