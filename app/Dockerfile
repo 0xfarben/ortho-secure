@@ -6,8 +6,6 @@ ENV PYTHONUNBUFFERED=1
 
 # Install system dependencies, including MySQL client
 RUN apt-get update && apt-get install -y \
-    gcc \
-    libpq-dev \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
