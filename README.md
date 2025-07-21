@@ -21,6 +21,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 
 ## Complete Video Demonstration
+![Architecture](https://raw.githubusercontent.com/0xfarben/ortho-secure/main/Architecture.drawio.svg)
 
 
 ## Reports folder
