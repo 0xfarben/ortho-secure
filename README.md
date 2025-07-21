@@ -2,7 +2,7 @@
 
 This project demonstrates a full-stack **DevSecOps** workflow for a Python web application and MySQL database, managed with Docker, Kubernetes, ArgoCD, and GitLab CI/CD. It includes secure secret management, automated vulnerability scanning, GitOps-based deployment, and monitoring with Prometheus and Grafana.
 
-<img src="app/static/img/icon/icon.png" alt="Icon" width="20"/> **Orthosecure: Secure, Modern Dental Practice Management**
+<img src="app/static/img/icon/icon.png" alt="orthosecure-logo-icon" width="20"/> **Orthosecure: Secure, Modern Dental Practice Management**
 ---
 
 **Orthosecure** is a fully responsive, full-stack web application designed to streamline dentistry appointment bookings, enhance administrative workflows, and improve patient engagement. With its user-friendly interface and powerful administrative panel, Orthosecure empowers dental practices to efficiently manage appointments, patient records, and clinic operations.
@@ -62,50 +62,62 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 ## CI/CD Pipeline (How It Works)
 
-Gitlab Link (SCM for this project) -> https://gitlab.com/nidith/ortho-secure
+<br>
+```html
+Gitlab Link (SCM for this project) -> ![https://gitlab.com/nidith/ortho-secure](https://gitlab.com/nidith/ortho-secure)
+```
+<br>
 
 ![Architecture](https://raw.githubusercontent.com/0xfarben/ortho-secure/main/Architecture.drawio.svg)
+<br>
 
-The pipeline is fully automated and ensures security, code quality, and safe deployment at every step:
+<center>The pipeline is fully automated and ensures security, code quality, and safe deployment at every step: </center>
 
-<img src="https://iili.io/FNarLlt.png" alt="image" border="0">
+<br>
+
+<img src="https://iili.io/FNarLlt.png" alt="ci-cd-pipeline-successful-pipeline-img" border="0">
+
+<br>
+
 
 1. **Setup Stage:**
    - Installs all Python dependencies and tools in a virtual environment for consistent builds.
 
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNcHW2s.png" alt="image" border="0">
+      <img src="https://iili.io/FNcHW2s.png" alt="setup-dependencies-stage-pipeline-img" border="0">
    </details>
 
 2. **Lint Stage:**
    - Checks code formatting and style using Black to enforce code quality and consistency.
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNlcozv.png" alt="image" border="0">
+      <img src="https://iili.io/FNlcozv.png" alt="black-lint-stage-pipeline-img" border="0">
    </details>
 
 3. **Security Stage:**
    - Runs Bandit for static security analysis (SAST) to catch common Python security issues early.
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNl0ARn.png" alt="image" border="0">
+      <img src="https://iili.io/FNl0ARn.png" alt="bandit-security-stage-pipeline-img" border="0">
    </details>
 
 4. **Test Stage:**
    - Runs unit tests with pytest and collects code coverage reports to ensure your code works as expected.
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNlENcB.png" alt="image" border="0">
+      <img src="https://iili.io/FNlENcB.png" alt="test-stage-pipeline-img" border="0">
    </details>
 
 5. **SonarQube Stage:**
    - Analyzes code quality and coverage using SonarQube, providing detailed feedback on maintainability and security.
    - Sonarqube got passed with 0 issues, 0 secuirty hotspots(some manually reviewed), got 87.2% code coverage & 0 duplication lines.
-   <img src="https://iili.io/FNElne9.png" alt="image" border="0">
+
+   <img src="https://iili.io/FNElne9.png" alt="sonarqube-scanned-result" border="0">
+
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNlhEAB.png" alt="image" border="0">
+      <img src="https://iili.io/FNlhEAB.png" alt="sonarqube-check-stage-pipeline-img" border="0">
    </details>
 
 6. **Build Stage:**
@@ -114,7 +126,7 @@ The pipeline is fully automated and ensures security, code quality, and safe dep
    - Cleans up old images on the build server to save space.
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNlO6I2.png" alt="image" border="0">
+      <img src="https://iili.io/FNlO6I2.png" alt="build-stage-pipeline-img" border="0">
    </details>
 
 7. **Scan Stage:**
@@ -122,15 +134,18 @@ The pipeline is fully automated and ensures security, code quality, and safe dep
    - If any critical vulnerabilities are found, the pipeline fails and deployment is blocked.
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNl8V4t.png" alt="image" border="0">
+      <img src="https://iili.io/FNl8V4t.png" alt="scan-stage-pipeline-img" border="0">
    </details>
 
 8. **Deploy Stage:**
    - If the scan passes, updates the Kubernetes manifests with the new image tags and pushes these changes to the Git repository (with `[ci skip]` to avoid pipeline loops).
    - ArgoCD detects the manifest change and automatically syncs the deployment to your Kubernetes cluster.
+
+   <img src="https://iili.io/FNVNFcP.png" alt="argocd-application-dashboard" border="0">
+
    - <details>
       <summary>Click to view the pipeline job</summary>
-      <img src="https://iili.io/FNlguG2.png" alt="image" border="0">
+      <img src="https://iili.io/FNlguG2.png" alt="deploy-stage-pipeline-img" border="0">
    </details>
 
 **This pipeline ensures that only secure, tested, and high-quality code is deployed to production, and that all changes are auditable and traceable.**
