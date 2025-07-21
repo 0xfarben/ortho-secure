@@ -99,6 +99,8 @@ The pipeline is fully automated and ensures security, code quality, and safe dep
 
 5. **SonarQube Stage:**
    - Analyzes code quality and coverage using SonarQube, providing detailed feedback on maintainability and security.
+   - Sonarqube got passed with 0 issues, 0 secuirty hotspots(some manually reviewed), got 87.2% code coverage & 0 duplication lines.
+   <img src="https://iili.io/FNElne9.png" alt="image" border="0">
    - <details>
       <summary>Click to view the pipeline job</summary>
       <img src="https://iili.io/FNlhEAB.png" alt="image" border="0">
@@ -146,7 +148,7 @@ The pipeline is fully automated and ensures security, code quality, and safe dep
 
 MIT License
 
-Copyright (c) 2024-2025 Nidith
+Copyright (c) 2024-2025 OrthoSecure
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -167,12 +169,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ---
+
 ## Contributors
 
 1.  **[Mohammad Thayeeb Shareef](https://github.com/thayeeb9211)**      **[Linkedin Link](https://www.linkedin.com/in/mohammed-thayeeb-shariff-2b614b2b2)**
 2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**       **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
 3.  **[Satish Biradar](https://github.com/satishbiradar0099)**      **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
+
 ---
+
 
 ## Acknowledgments
 
