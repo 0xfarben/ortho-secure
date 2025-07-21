@@ -1,0 +1,197 @@
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip-cache"
+  TEST_SECRET_KEY: $SECRET_KEY
+  IMAGE_TAG: "$CI_COMMIT_SHA"
+  
+stages:
+  - setup
+  - lint
+  - security
+  - test
+  - sonarqube
+  - build
+  - scan
+  - deploy
+
+# Cache configuration for faster builds
+cache:
+  key: ${CI_COMMIT_REF_SLUG}-pip
+  paths:
+    - .pip-cache/
+    - venv/
+  policy: pull-push
+
+# Setup stage - Install all dependencies once
+setup:
+  stage: setup
+  tags:
+    - myvps
+  script:
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install --cache-dir .pip-cache --upgrade pip
+    - pip install --cache-dir .pip-cache -r app/requirements.txt
+    - pip install --cache-dir .pip-cache black bandit pytest pytest-html pytest-cov
+    - echo "✅ All dependencies installed successfully!"
+  artifacts:
+    paths:
+      - venv/
+    expire_in: 1 hour
+
+# # Base template for Python jobs
+.python-base: &python-base
+  dependencies:
+    - setup
+  before_script:
+    - source venv/bin/activate
+
+# # Lint stage - Code formatting
+lint:
+  <<: *python-base
+  stage: lint
+  tags:
+    - myvps
+  script:
+    - black --check --diff .
+
+# Security stage - Static security analysis
+security:
+  <<: *python-base
+  stage: security
+  tags:
+    - myvps
+  script:
+    - bandit -r app --exclude tests --format json --output bandit-report.json --skip B101,B105 || true
+    - bandit -r app --exclude tests --skip B101,B105
+  artifacts:
+    paths:
+      - bandit-report.json
+    expire_in: 1 week
+    when: always
+
+# # Test stage - Unit tests
+test:
+  <<: *python-base
+  stage: test
+  tags:
+    - myvps
+  script:
+    - pytest --cov=app --cov-report=xml
+  artifacts:
+    paths:
+      - coverage.xml
+    expire_in: 1 week
+
+
+# SonarQube - Code Quality Analysis
+sonarqube-check:
+  stage: sonarqube
+  tags:
+    - myvps
+  dependencies:
+    - test
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+    GIT_DEPTH: "0"
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - echo "[SONARQUBE] Listing files in project root:"
+    - ls -lha
+    - echo "[SONARQUBE] Showing first 20 lines of coverage.xml (if exists):"
+    - 'if [ -f coverage.xml ]; then head -20 coverage.xml; else echo "coverage.xml not found"; fi'
+    - echo "📊 Running SonarQube analysis..."
+    - sonar-scanner -Dsonar.projectKey=$CI_PROJECT_NAME -Dsonar.sources=app -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.python.coverage.reportPaths=coverage.xml -Dsonar.exclusions=**/tests/**,**/venv/**,**/env/**
+    - echo "✅ SonarQube analysis completed!"
+  allow_failure: true
+  only:
+    - merge_requests
+    - main
+    - master
+    - develop
+
+# Build - Build the application to docker images.
+build:
+  stage: build
+  tags:
+    - myvps
+  before_script:
+    - docker-compose version
+    - docker --version
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  script:
+    - touch .env
+    - >
+      sed -i "s|image: nidithvs/app_orthosecure:.*|image: nidithvs/app_orthosecure:$IMAGE_TAG|" docker-compose.yml &&
+      sed -i "s|image: nidithvs/db_orthosecure:.*|image: nidithvs/db_orthosecure:$IMAGE_TAG|" docker-compose.yml
+    - docker-compose build --pull --no-cache
+    - docker-compose push
+  after_script:
+    # delete unwanted images
+    - docker images --filter "label=project=ortho-secure" -q | xargs -r docker rmi || true 
+    - docker logout || true
+  only:
+    - master
+    - main
+    - develop
+    - merge_requests
+
+# Scan - Scan the docker images for any vulnerabilities.
+scan:
+  stage: scan
+  tags:
+    - myvps
+  script:
+    - echo "THIS STAGE WILL FAIL, ONLY IF THERE ARE '💀CRITICAL💀' VULNERABILITIES"
+    - echo "🔍 Scanning for CRITICAL vulnerabilities in python app image..."
+    - trivy image --exit-code 1 --severity CRITICAL nidithvs/app_orthosecure:$IMAGE_TAG
+
+    - echo " 📒 Creating Report for python app image..." 
+    - trivy image --format json --output trivy-app-report.json --severity CRITICAL nidithvs/app_orthosecure:$IMAGE_TAG
+
+    - echo "🔍 Scanning for CRITICAL vulnerabilities in db image..."
+    - trivy image --exit-code 1 --severity CRITICAL nidithvs/db_orthosecure:$IMAGE_TAG
+
+    - echo " 📒 Creating Report for db image..." 
+    - trivy image --format json --output trivy-db-report.json --severity CRITICAL nidithvs/db_orthosecure:$IMAGE_TAG
+
+    - echo "✅ Security scan completed! && Reports generated!"
+  artifacts:
+    paths:
+      - trivy-app-report.json
+      - trivy-db-report.json
+    expire_in: 1 week
+    when: always
+  only:
+    - master
+    - main
+    - develop
+    - merge_requests
+
+# Update k8s Manifests / Deploy [Argo CD]
+deploy:
+  stage: deploy
+  tags:
+    - myvps
+  script:
+    - export IMAGE_TAG=$CI_COMMIT_SHA
+    - git config --global user.email "vsnidith@gmail.com"
+    - git config --global user.name "Nidith"
+    - git remote set-url origin https://gitlab-ci-token:${GITLAB_TOKEN}@gitlab.com/nidith/ortho-secure.git
+    - git fetch origin
+    - git checkout $CI_COMMIT_REF_NAME
+    - git pull origin $CI_COMMIT_REF_NAME
+    - >
+      sed -i "s|image: nidithvs/app_orthosecure:.*|image: nidithvs/app_orthosecure:$IMAGE_TAG|" k8s/app-deployment.yaml &&
+      sed -i "s|image: nidithvs/db_orthosecure:.*|image: nidithvs/db_orthosecure:$IMAGE_TAG|" k8s/db-deployment.yaml
+    - git add k8s/app-deployment.yaml k8s/db-deployment.yaml
+    - git commit -m "Update app and db image tags to $IMAGE_TAG [ci skip]" || echo "No changes to commit"
+    - git push origin $CI_COMMIT_REF_NAME
+    - echo "ArgoCD working under hood... on the latest k8s updates"
+  only:
+    - master
+    - main
+    - develop
+    - merge_requests
