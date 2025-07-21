@@ -62,6 +62,8 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 ## CI/CD Pipeline (How It Works)
 
+Gitlab Link (SCM for this project) -> https://gitlab.com/nidith/ortho-secure
+
 ![Architecture](https://raw.githubusercontent.com/0xfarben/ortho-secure/main/Architecture.drawio.svg)
 
 The pipeline is fully automated and ensures security, code quality, and safe deployment at every step:
