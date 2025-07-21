@@ -167,6 +167,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ---
+## Contributors
+
+1.  **[Mohammad Thayeeb Shareef](https://github.com/thayeeb9211)**      **[Linkedin Link](https://www.linkedin.com/in/mohammed-thayeeb-shariff-2b614b2b2)**
+2.  **[Ramachandragowda S Patil](https://github.com/Ram-82)**       **[Linkedin Link](https://www.linkedin.com/in/ramachandragowda-s-p-b9706a228/)**
+3.  **[Satish Biradar](https://github.com/satishbiradar0099)**      **[Linkedin Link](https://www.linkedin.com/in/satish-biradar-38023a284/)**
+---
 
 ## Acknowledgments
 
