@@ -61,12 +61,12 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 ---
 
 ## CI/CD Pipeline (How It Works)
-
-<br>
+<br> </br>
 ```sh
-Gitlab Link (SCM for this project) -> https://gitlab.com/nidith/ortho-secure
-```
-<br>
+   Gitlab Link (SCM for this project) -> https://gitlab.com/nidith/ortho-secure
+   
+   ```
+<br> </br>
 
 ![Architecture](https://raw.githubusercontent.com/0xfarben/ortho-secure/main/Architecture.drawio.svg)
 <br>
