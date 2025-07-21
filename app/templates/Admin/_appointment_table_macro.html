@@ -1,0 +1,62 @@
+{% macro appointment_table(title, status, show_date=False, show_form=False) %}
+<button type="button" class="text-decoration-none text-secondary btn btn-link p-0"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapse-Table-{{ status }}"
+        aria-expanded="false"
+        aria-controls="collapse-Table-{{ status }}"
+        onkeydown="if(event.key==='Enter'){this.click();}">
+  <h3 class="fw-bolder">{{ title }}</h3>
+</button>
+<div class="collapse table-responsive col-12" id="collapse-Table-{{ status }}">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">SSN</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Middle Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Doctor Name</th>
+        <th scope="col">Service</th>
+        <th scope="col">Username</th>
+        {% if show_date %}<th scope="col">Date</th>{% endif %}
+        {% if show_form %}<th scope="col">Status</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for Appointment in AppointmentsTable %}
+        {% if Appointment[8] == status %}
+        <tr>
+          <th scope="row">{{Appointment[0]}}</th>
+          <td>{{Appointment[1]}}</td>
+          <td>{{Appointment[2]}}</td>
+          <td>{{Appointment[3]}}</td>
+          <td>{{Appointment[4]}}</td>
+          <td>{{Appointment[5]}}</td>
+          <td>{{Appointment[6]}}</td>
+          <td>{{Appointment[10]}}</td>
+          <td>{{Appointment[11]}}</td>
+          <td>{{Appointment[9]}}</td>
+          {% if show_date %}<td>{{Appointment[7]}}</td>{% endif %}
+          {% if show_form %}
+          <td>
+            <form action="{{ url_for('appointments_admin') }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <input class="visually-hidden" type="int" name="id" value="{{Appointment[0]}}">
+              <input class="form-control" type="date" name="date" required>
+              <div class=" text-center mt-2">
+                  <input name="status" type="submit" class="btn btn-success" value="Accept">
+                  <input name="status" type="submit" class="btn btn-danger" value="Refuse">
+              </div>
+            </form>
+          </td>
+          {% endif %}
+        </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endmacro %} 

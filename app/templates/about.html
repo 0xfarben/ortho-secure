@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<main>
+    <div class="p-5 container text-center">
+      <h1 class="fw-bolder text-secondary text-uppercase">About <span class="text-primary">{{session.title}}</span></h1>
+      <div class="p-3"></div>
+      <div class="about-text row">
+        <div class="col-md-4 pull-left mr-2">
+          <img class="img-thumbnail img-fluid" src="{{ url_for('static', filename='img/About/AboutUs.jpg') }}" alt="About Us">
+        </div>
+        <div class="lead text-start justify-content-end col-md-8">
+            {# The content of session.long is trusted and sanitized before being stored. #}
+            {{session.long|safe}}
+        </div>
+      </div>
+    </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+    spec:
+      containers:
+      - name: python-app
+        image: nidithvs/app_orthosecure:0453c3b9dc9fa0420264f9360377304556bf0460
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: ortho-configs
+        - secretRef:
+            name: ortho-secrets
+        command: ["sh", "-c", "ls -l /app && ./wait-for.sh mysql-db gunicorn --bind 0.0.0.0:5000 main:app"]

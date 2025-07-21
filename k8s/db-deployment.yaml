@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-db
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-db
+  template:
+    metadata:
+      labels:
+        app: mysql-db
+    spec:
+      containers:
+      - name: mysql-db
+        image: nidithvs/db_orthosecure:0453c3b9dc9fa0420264f9360377304556bf0460
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - configMapRef:
+            name: ortho-configs
+        - secretRef:
+            name: ortho-secrets
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc

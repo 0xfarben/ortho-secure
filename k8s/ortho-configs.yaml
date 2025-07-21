@@ -1,0 +1,12 @@
+# These Non Sensitive Values.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ortho-configs
+data:
+  MYSQL_HOST: mysql-db
+  MYSQL_DATABASE: dbortho
+  MYSQL_USER: admin
+  FLASK_ENV: production
+  MYSQL_PORT: "3306"
+  MYSQL_INITDB_SKIP_TZINFO: "1"

@@ -1,0 +1,10 @@
+{% extends 'Admin/base.html' %}
+{% import 'Admin/_appointment_table_macro.html' as tables %}
+{% block body %}
+<h1 class="text-decoration-none fw-bolder text-primary text-uppercase">Appointments</h1>
+
+{{ tables.appointment_table('Waiting Appointments', 'Waiting', show_form=True) }}
+{{ tables.appointment_table('Refused Appointments', 'Refused') }}
+{{ tables.appointment_table('Scheduled Appointments', 'Scheduled', show_date=True) }}
+
+{% endblock %}
