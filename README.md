@@ -133,7 +133,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 8. **Deploy Stage:**
    - If the scan passes, updates the Kubernetes manifests with the new image tags and pushes these changes to the Git repository (with `[ci skip]` to avoid pipeline loops).
    - ArgoCD detects the manifest change and automatically syncs the deployment to your Kubernetes cluster.
-
+   <br> </br>
    <img src="https://iili.io/FNVNFcP.png" alt="argocd-application-dashboard" border="0">
 
    - <details>
