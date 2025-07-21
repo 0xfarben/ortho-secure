@@ -1,6 +1,11 @@
 services:
   mysql_db:
-    build: ./db/
+    image: nidithvs/db_orthosecure:latest
+    # comment out above line for local docker running.
+    build:
+      context: ./db/
+      labels:
+        - project=ortho-secure
     container_name: mysql_db_orthosecure
     restart: always
     ports:
@@ -13,18 +18,24 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
     networks:
       - orthosecure_network
 
   python_app:
-    build: ./app/
+    image: nidithvs/app_orthosecure:latest
+    # comment out above line for local docker running.
+    build:
+      context: ./app/
+      labels:
+        - project=ortho-secure
     container_name: python_app_orthosecure
     env_file:
       - ".env"
     ports:
       - "5000:5000"
-    command: sh -c "ls -l /app && ./wait-for.sh mysql_db python main.py"
+    command: sh -c "ls -l /app && ./wait-for.sh mysql_db gunicorn --bind 0.0.0.0:5000 main:app"
+    # use --> mysql-db if running inside kubernetes cluster. else for using in docker -> mysql_db
     depends_on:
       mysql_db:
         condition: service_healthy
@@ -36,4 +47,3 @@ volumes:
 
 networks:
   orthosecure_network:
-
