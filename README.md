@@ -69,12 +69,8 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 <div align="center">
 <center>The pipeline is fully automated and ensures security, code quality, and safe deployment at every step: </center>
-</div>
-
 <img src="https://iili.io/FNarLlt.png" alt="ci-cd-pipeline-successful-pipeline-img" border="0">
-
-<br> </br>
-
+</div>
 
 1. **Setup Stage:**
    - Installs all Python dependencies and tools in a virtual environment for consistent builds.
