@@ -105,7 +105,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 5. **SonarQube Stage:**
    - Analyzes code quality and coverage using SonarQube, providing detailed feedback on maintainability and security.
    - Sonarqube got passed with 0 issues, 0 secuirty hotspots(some manually reviewed), got 87.2% code coverage & 0 duplication lines.
-<br>
+<br> </br>
    <img src="https://iili.io/FNElne9.png" alt="sonarqube-scanned-result" border="0">
 
    - <details>
