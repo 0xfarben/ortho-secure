@@ -67,7 +67,9 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 ![Architecture](https://raw.githubusercontent.com/0xfarben/ortho-secure/main/Architecture.drawio.svg)
 <hr>
 
+<div align="center">
 <center>The pipeline is fully automated and ensures security, code quality, and safe deployment at every step: </center>
+</div>
 
 <img src="https://iili.io/FNarLlt.png" alt="ci-cd-pipeline-successful-pipeline-img" border="0">
 
