@@ -39,8 +39,6 @@ terraform.rc
 .env
 # Ignore all environment variable files
 .env
-.env.*
-.env.docker
 
 # Python cache
 __pycache__/
