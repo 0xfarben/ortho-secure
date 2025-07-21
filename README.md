@@ -64,7 +64,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 <br>
 ```sh
-Gitlab Link (SCM for this project) -> ![https://gitlab.com/nidith/ortho-secure](https://gitlab.com/nidith/ortho-secure)
+Gitlab Link (SCM for this project) -> https://gitlab.com/nidith/ortho-secure
 ```
 <br>
 
