@@ -148,7 +148,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 ## Monitoring & Observability
 
 - **Prometheus & Grafana:** Deployed via Helm (`kube-prometheus-stack`).
-- **Dashboards:** Access Grafana at [https://grafana.orthosecure.work.gd](https://grafana.orthosecure.work.gd) (anonymous view-only).
+- **Dashboards:** Access Grafana at [https://dashboard.orthosecure.work.gd](https://dashboard.orthosecure.work.gd).
 - **Metrics:** Cluster, pod, and app metrics are collected and visualized.
 - **Alerting:** Configure alerts in Prometheus/Grafana as needed.
 
