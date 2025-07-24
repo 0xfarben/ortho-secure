@@ -125,15 +125,15 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 7. **Scan Stage:**
    - Scans the built Docker images for critical vulnerabilities using Trivy.
    - If any critical vulnerabilities are found, the pipeline fails and deployment is blocked.
-
-   - <details style="color: red;">
-      <summary>There are 2 Critical vulnerabilities (Date: 24-7-2025) (No Fixed Versions avaialble) - Refer .trivyignore File for more info.</summary>
-      <a href="https://security-tracker.debian.org/tracker/CVE-2023-45853">Link to CVE-2023-45853 vulnerability (will be fixed soon..)</a>
-      <br> </br>
-      <a href="https://security.snyk.io/vuln/SNYK-DEBIANUNSTABLE-SQLITE3-10753053">Link to CVE-2025-6965 vulnerability</a>
-      <br> </br>
-      <img src="https://iili.io/Fe80rdb.png" alt="CVE-image" border="0">
-   </details>
+   ![Critical](https://img.shields.io/badge/Status-Critical-red)  
+   **Two Critical Vulnerabilities (Date: 24-7-2025)**  
+   **No fixed versions available. Refer `.trivyignore` for details.**  
+   <details>
+     <summary>Details</summary>
+     - [CVE-2023-45853](https://security-tracker.debian.org/tracker/CVE-2023-45853) (will be fixed soon)  
+     - [CVE-2025-6965](https://security.snyk.io/vuln/SNYK-DEBIANUNSTABLE-SQLITE3-10753053)  
+     ![CVE-image](https://iili.io/Fe80rdb.png)
+</details>
 
 8. **Deploy Stage:**
    - If the scan passes, updates the Kubernetes manifests with the new image tags and pushes these changes to the Git repository (with `[ci skip]` to avoid pipeline loops).
