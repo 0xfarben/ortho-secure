@@ -126,7 +126,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
    - Scans the built Docker images for critical vulnerabilities using Trivy.
    - If any critical vulnerabilities are found, the pipeline fails and deployment is blocked.
 
-   - <details>
+   - <details style="color: red;">
       <summary>There are 2 Critical vulnerabilities (Date: 24-7-2025) (No Fixed Versions avaialble) - Refer .trivyignore File for more info.</summary>
       <a href="https://security-tracker.debian.org/tracker/CVE-2023-45853">Link to CVE-2023-45853 vulnerability (will be fixed soon..)</a>
       <br> </br>
