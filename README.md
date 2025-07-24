@@ -30,7 +30,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 ### For End Users
 
 1. **Visit the Application:**
-   - Go to [https://orthosecure.work.gd](https://orthosecure.work.gd)
+   - Go to [https://orthosecure.health](https://orthosecure.health)
    - Book, modify, or cancel appointments online.
    - Log in as a patient.
 
@@ -153,7 +153,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 ## Monitoring & Observability
 
 - **Prometheus & Grafana:** Deployed via Helm (`kube-prometheus-stack`).
-- **Dashboards:** Access Grafana at [https://dashboard.orthosecure.work.gd](https://dashboard.orthosecure.work.gd).
+- **Dashboards:** Access Grafana at [https://dashboard.orthosecure.health](https://dashboard.orthosecure.health).
 - **Metrics:** Cluster, pod, and app metrics are collected and visualized.
 - **Alerting:** Configure alerts in Prometheus/Grafana as needed.
 
