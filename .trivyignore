@@ -1,1 +1,6 @@
+# Critical Vulnerability (zlib) - Fix version only in python-3.11-trixiel
+# Not found for other versions.
 CVE-2023-45853
+
+# Critical Vulnerability (slite3) - No Fixed Version for Debian related OSes.
+CVE-2025-6965
