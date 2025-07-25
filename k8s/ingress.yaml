@@ -10,11 +10,10 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - orthosecure.work.gd
-    # - orthosecure.work.gd
+    - orthosecure.health
     secretName: python-app-tls
   rules:
-  - host: orthosecure.work.gd
+  - host: orthosecure.health
     http:
       paths:
       - path: /
