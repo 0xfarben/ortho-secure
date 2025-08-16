@@ -11,9 +11,20 @@ spec:
   tls:
   - hosts:
     - orthosecure.health
+    - orthosecure.online
     secretName: python-app-tls
   rules:
   - host: orthosecure.health
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: python-app
+            port:
+              number: 5000
+  - host: orthosecure.online
     http:
       paths:
       - path: /
