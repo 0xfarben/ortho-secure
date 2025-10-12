@@ -38,7 +38,7 @@ OrthoSecure is a robust and secure application designed to enhance security and 
 
 ### For End Users
 
-1. **Visit the Application:** (uses 2 domains)
+1. **Visit the Application:** (uses 2 domains) [ currently down due to unpaid server costs s🥲😓]
    - Go to [https://orthosecure.health](https://orthosecure.health) or [https://orthosecure.online](https://orthosecure.online)
    - Book, modify, or cancel appointments online.
    - Log in as a patient.
@@ -209,6 +209,7 @@ SOFTWARE.
 ## ⭐ Support the Project
 
 If you found this helpful, consider starring ⭐ the repository and sharing it with your network! 🚀
+
 
 
 
